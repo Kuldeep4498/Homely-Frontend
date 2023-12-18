@@ -1,0 +1,74 @@
+.navbar {
+    align-items: center;
+    background-color: var(--primarydark-blue-1);
+    display: flex;
+    position: relative;
+  }
+  
+  .navigation {
+    display: flex;
+    align-items: flex-start;
+    gap: 57px;
+  }
+  
+  .text-wrapper {
+    color: var(--neutural-white, #FFF);
+    font-family: "Plus Jakarta Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 120% */
+  }
+  
+ .element-services {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .navbar .shape {
+    background-color: #ff5d5d;
+    border-radius: 6px;
+    height: 12px;
+    position: relative;
+    width: 12px;
+  }
+  
+  .navbar .element-hour-services {
+    color: var(--neutural-white, #FFF);
+    text-align: right;
+    
+    /* Button/18 */
+    font-family: "Plus Jakarta Sans-Regular", Helvetica;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+  }
+  
+  .navbar .example-logo {
+    flex: 0 0 auto !important;
+    position: relative !important;
+  }
+  
+  .navbar .menu {
+    height: 24px;
+    margin-right: -0.26px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .navbar.dekstop {
+    justify-content: space-between;
+    padding: 24px 100px;
+    background: var(--primary-dark-blue-1, #142257);
+  }
+  
+  .navbar.mobile {
+    gap: 155px;
+    padding: 12px 24px;
+    width: 375px;
+  }
+  
