@@ -13,10 +13,10 @@
   
   .text-wrapper {
     color: var(--neutural-white, #FFF);
-    font-family: "Plus Jakarta Sans";
-    font-size: 20px;
+ 
+    font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 24px; /* 120% */
   }
   
@@ -42,7 +42,7 @@
     
     /* Button/18 */
     font-family: "Plus Jakarta Sans-Regular", Helvetica;
-    font-size: 18px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px; /* 133.333% */

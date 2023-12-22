@@ -99,17 +99,25 @@ export const Navbar = ({
     setShowPhoneNumberInput((prevValue) => !prevValue);
   };
 
+  const handleservices = () => {
+   window.location.href="/services"
+  };
+
+  const handlehome = () => {
+    window.location.href="/"
+   };
+
 
   return (
     <div className={`navbar ${size} ${className}`}>
-      <div className="d-flex align-items-center col-md-2 justify-content-center">
+      <div className="d-flex align-items-center col-md-2 justify-content-center" onClick={handlehome}>
         {icon}
-        <span style={{ fontWeight: '700', fontSize: '18px', color: 'white', fontFamily: '"Plus Jakarta Sans-Regular", Helvetica', fontStyle: 'normal', cursor: 'pointer' }}>Homely</span>
+        <span style={{ fontWeight: '700', fontSize: '20px', color: 'white', cursor: 'pointer' }}>Homely</span>
       </div>
 
       <div className="navigation col-md-6 justify-content-center">
         <div className={`text-wrapper ${divClassName}`} style={{ cursor: 'pointer' }}>About Us</div>
-        <div className={`text-wrapper ${divClassNameOverride}`} style={{ cursor: 'pointer' }}>Services</div>
+        <div className={`text-wrapper ${divClassNameOverride}`} style={{ cursor: 'pointer' }} onClick={handleservices}>Services</div>
         {hasDiv && <div className="text-wrapper">Our Blog</div>}
         <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }}>Contact</div>
       </div>

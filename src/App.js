@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./landingPage"; // Assuming Landing is your component
-import Service from "./services"
+import Service from "./Services/servicesPage"
 function App() {
   return (
     <Router>
