@@ -12,7 +12,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
 
 export const Navbar = ({
   size,
@@ -27,11 +26,14 @@ export const Navbar = ({
   const [openLoginDialog, setOpenLoginDialog] = useState(false);
   const [openVerificationDialog, setOpenVerificationDialog] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState([]);
   const [timer, setTimer] = useState(30);
+  const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
 
   const handleOpenLoginDialog = () => {
     setOpenLoginDialog(true);
+    setShowPhoneNumberInput(true);
   };
 
   const handleCloseLoginDialog = () => {
@@ -51,6 +53,10 @@ export const Navbar = ({
     const input = event.target.value;
     const numericInput = input.replace(/[^0-9]/g, '');
     setPhoneNumber(numericInput);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handleVerificationCodeChangeForIndex = (event, index) => {
@@ -89,8 +95,11 @@ export const Navbar = ({
     startTimer();
   };
 
+  const handleToggleInput = () => {
+    setShowPhoneNumberInput((prevValue) => !prevValue);
+  };
 
-  
+
   return (
     <div className={`navbar ${size} ${className}`}>
       <div className="d-flex align-items-center col-md-2 justify-content-center">
@@ -111,112 +120,129 @@ export const Navbar = ({
       </div>
 
       {/* Login Dialog */}
-     
-        <Dialog open={openLoginDialog} onClose={handleCloseLoginDialog} fullWidth maxWidth="xs">
-          <DialogTitle>
-            Login/Signup
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseLoginDialog}
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent>
+      <Dialog open={openLoginDialog} onClose={handleCloseLoginDialog} fullWidth maxWidth="xs">
+        <DialogTitle>
+          Login/Signup
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseLoginDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          {showPhoneNumberInput && (
+            <>
+              <TextField
+                label="Phone Number"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+              />
+              <FormControlLabel
+                control={<Checkbox id="orderUpdates" />}
+                label="Receive order updates"
+              />
+            </>
+          )}
+          {!showPhoneNumberInput && (
             <TextField
-              label="Phone Number"
+              label="Email"
               variant="outlined"
               fullWidth
               margin="normal"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
+              value={email}
+              onChange={handleEmailChange}
             />
-            <FormControlLabel
-              control={<Checkbox id="orderUpdates" />}
-              label="Receive order updates"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={!phoneNumber || phoneNumber.length <= 1}
-              onClick={handleProceedToVerification}
-            >
-              Proceed
-            </Button>
-          </DialogActions>
-        </Dialog>
-    
+          )}
+          <div style={{ marginTop: '10px' }}>
+        
+            <span style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
+              Click here
+            </span>{' '}
+            to switch {showPhoneNumberInput ? 'to email.' : 'to phone number.'}
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            disabled={(!showPhoneNumberInput && !email) || (showPhoneNumberInput && (!phoneNumber || phoneNumber.length <= 1))}
+            onClick={handleProceedToVerification}
+          >
+            Proceed
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Verification Dialog */}
-      
-        <Dialog open={openVerificationDialog} onClose={handleCloseVerificationDialog} fullWidth maxWidth="xs">
-          <DialogTitle>
-            Verification Code
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseVerificationDialog}
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent>
+      <Dialog open={openVerificationDialog} onClose={handleCloseVerificationDialog} fullWidth maxWidth="xs">
+        <DialogTitle>
+          Verification Code
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseVerificationDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <div>
+            <h6>We have sent you a 4 Digit code</h6>
+          </div>
+          {timer > 0 ? (
             <div>
-              <h6>We have sent you a 4 Digit code</h6>
+              <p>Time remaining: {timer} seconds</p>
             </div>
-            {timer > 0 ? (
-              <div>
-                <p>Time remaining: {timer} seconds</p>
-              </div>
-            ) : (
-              <div style={{ cursor: 'pointer', color: 'blue' }} onClick={handleResendCode}>
-                Resend Code
-              </div>
-            )}
+          ) : (
+            <div style={{ cursor: 'pointer', color: 'blue' }} onClick={handleResendCode}>
+              Resend Code
+            </div>
+          )}
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-              {[1, 2, 3, 4].map((index) => (
-                <TextField
-                  key={index}
-                  variant="outlined"
-                  margin="normal"
-                  inputProps={{
-                    maxLength: 1,
-                    style: { textAlign: 'center', width: '2em' },
-                  }}
-                  value={verificationCode[index - 1] || ''}
-                  onChange={(event) => handleVerificationCodeChangeForIndex(event, index)}
-                />
-              ))}
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={verificationCode.length !== 4 || verificationCode.includes('')}
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
-          </DialogActions>
-        </Dialog>
- 
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+            {[1, 2, 3, 4].map((index) => (
+              <TextField
+                key={index}
+                variant="outlined"
+                margin="normal"
+                inputProps={{
+                  maxLength: 1,
+                  style: { textAlign: 'center', width: '2em' },
+                }}
+                value={verificationCode[index - 1] || ''}
+                onChange={(event) => handleVerificationCodeChangeForIndex(event, index)}
+              />
+            ))}
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            disabled={verificationCode.length !== 4 || verificationCode.includes('')}
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

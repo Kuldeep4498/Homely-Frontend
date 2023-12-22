@@ -62,7 +62,7 @@
   
   .navbar.dekstop {
     justify-content: space-between;
-    padding: 24px 100px;
+    padding: 24px 36px;
     background: var(--primary-dark-blue-1, #142257);
   }
   

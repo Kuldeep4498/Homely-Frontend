@@ -35,22 +35,24 @@ const Landing = () => {
   }, []); 
 
   return (
+    <>
+    <Navbar
+    className="navbar-v col-md-12"
+    divClassName="navbar-v1"
+    divClassName1="navbar-v1"
+    divClassNameOverride="navbar-v1"
+    hasDiv={false}
+    icon={<ExampleLogo className="example-logo-instance" />}
+    size="dekstop"
+    text="Login"
+  />
     <div
       className="box container-fluid min-vh-100"
       style={{
         backgroundColor: "#142257",
       }}
     >
-      <Navbar
-        className="navbar-v col-md-12"
-        divClassName="navbar-v1"
-        divClassName1="navbar-v1"
-        divClassNameOverride="navbar-v1"
-        hasDiv={false}
-        icon={<ExampleLogo className="example-logo-instance" />}
-        size="dekstop"
-        text="Login"
-      />
+    
      <div className="d-flex flex-column grid gap-3">
      <div
         className="d-flex align-items-center justify-content-between col-md-12"
@@ -201,6 +203,7 @@ const Landing = () => {
      </div>
      
     </div>
+    </>
   );
 };
 export default Landing;
