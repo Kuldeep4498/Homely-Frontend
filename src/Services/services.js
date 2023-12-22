@@ -10,7 +10,7 @@ const Divservices = () => {
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: '#E7F0F9' }}>
       <div className="container d-flex col-md-12 justify-content-center " style={{width:'75vw'}}>
-        <div className="d-flex col-md-12 flex-column" style={{height:'50rem'}}>
+        <div className="d-flex col-md-12 flex-column py-5" style={{height:'45rem'}}>
         <div className="row" style={{height:'40em'}}>
           <div className="d-flex col-md-4 flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column">
@@ -28,7 +28,7 @@ const Divservices = () => {
               <div className="d-flex flex-column justify-content-center" style={{
                 color: '#002434',
                lineHeight:"60px",
-                fontSize: '59.156px',
+                fontSize: '55px',
                 fontWeight: 700,
               }}>
                 <p style={{ marginBottom: 0 }}>Our </p>
