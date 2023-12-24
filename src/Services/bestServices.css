@@ -1,0 +1,24 @@
+.best-service-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .carousel-item {
+    min-width: 280px;
+    scroll-snap-align: start;
+    margin-right: 16px; /* Adjust spacing between items */
+  }
+  
+  .card {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  

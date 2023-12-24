@@ -3,6 +3,7 @@ import Divservices from "./services"
 import { Navbar } from "../navbar";
 import { ReactComponent as ExampleLogo } from "../Images/Example Logo.svg";
 import Servicecard from "./serviceCard";
+import BestService from "./bestService";
 const servicespage = () =>{
 return(
     <>
@@ -19,6 +20,8 @@ return(
     <div className="container-fluid min-vh-100">
 <Divservices/>
 <Servicecard/>
+<BestService/>
+
     </div>
     </>
 )

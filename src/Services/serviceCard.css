@@ -1,0 +1,48 @@
+.card-enter-first,
+.card-enter,
+.card-enter-active,
+.card-exit,
+.card-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.card-enter-first {
+  transform: translateX(-100%);
+}
+
+.card-enter {
+  transform: translateX(100%);
+}
+
+.card-enter-active,
+.card-exit,
+.card-exit-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+.carousel {
+    position: relative;
+  }
+  
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    color: black;
+  }
+  
+  .prev-btn {
+    left: 20px; /* Adjust the left position as needed */
+  }
+  
+  .next-btn {
+    right: 20px; /* Adjust the right position as needed */
+  }
+  
