@@ -58,7 +58,7 @@ const ServiceCard = () => {
             </Button>
           </div>
           <div className='d-flex justify-content-center col-md-6 align-items-center'>
-            <img src={card.imageUrl} alt="" style={{ height: '215px', width: '195px' }} />
+            <img src={card.imageUrl} alt="" style={{ height: '215px', width: '197px' }} />
           </div>
         </div>
       </CSSTransition>
@@ -76,7 +76,7 @@ const ServiceCard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="container py-5" style={{ width: '80vw' }}>
+    <div className="container-fluid py-5" style={{ width: '85vw' }}>
       <div className="row ">
         <div
           id="carouselExampleIndicators2"
@@ -93,7 +93,7 @@ const ServiceCard = () => {
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
-          <TransitionGroup className="card-deck d-flex grid gap-3" style={{height:'215px'}}>{renderCards()}</TransitionGroup>
+          <TransitionGroup className="card-deck d-flex grid gap-4" style={{height:'215px'}}>{renderCards()}</TransitionGroup>
           <button
             className="btn btn-outline-light mb-3 next-btn"
             onClick={(e) => {
