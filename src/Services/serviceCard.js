@@ -91,6 +91,7 @@ const ServiceCard = () => {
               showPrevCards();
             }}
             disabled={currentIndex === 0}
+            style={{ backgroundColor: 'white', borderRadius: '20px' }}
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
@@ -101,6 +102,7 @@ const ServiceCard = () => {
               e.preventDefault();
               showNextCards();
             }}
+            style={{ backgroundColor: 'white', borderRadius: '20px' }}
           >
             <i className="fa fa-arrow-right fs-5" style={{ color: 'black' }} />
           </button>

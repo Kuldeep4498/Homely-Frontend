@@ -48,7 +48,7 @@ const BestService = () => {
         <Card className="custom-card "style={{width:'26vw',borderRadius:'12px'}}>
           <CardMedia component="img" height="250" image={card.imageUrl} alt={card.title} />
           <CardContent>
-            <Typography variant="h5" component="div" style={{fontWeight:600}}>
+            <Typography variant="h6" component="div" style={{fontWeight:600}}>
               {card.title}
             </Typography>
           
@@ -96,6 +96,7 @@ const BestService = () => {
               showPrevCards();
             }}
             disabled={currentIndex === 0}
+            style={{ backgroundColor: 'white', borderRadius: '20px' }}
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
@@ -106,6 +107,7 @@ const BestService = () => {
               e.preventDefault();
               showNextCards();
             }}
+            style={{ backgroundColor: 'white', borderRadius: '20px' }}
           >
             <i className="fa fa-arrow-right fs-5" style={{ color: 'black' }} />
           </button>
