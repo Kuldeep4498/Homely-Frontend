@@ -44,7 +44,7 @@ const ServiceCard = () => {
         }}
       >
         <div className="col-md-4 col-sm-6 d-flex" style={{ backgroundColor: '#142257', borderRadius: '14px' }}>
-          <div className="d-flex justify-content-center flex-column col-md-6 align-items-center gap-3">
+          <div className="d-flex justify-content-center flex-column col-md-6 align-items-center grid gap-4">
             <div className='text-center'>
               <h4 className='mb-0' style={{ fontWeight: 'bold', fontSize: '19px', cursor: 'pointer', color: 'white' }}>
                 {card.title}
@@ -57,8 +57,8 @@ const ServiceCard = () => {
               Book Now
             </Button>
           </div>
-          <div className='d-flex justify-content-center col-md-6 align-items-center'>
-            <img src={card.imageUrl} alt="" style={{ height: '215px', width: '197px' }} />
+          <div className='d-flex justify-content-end col-md-6 align-items-center'>
+            <img src={card.imageUrl} alt="" style={{ height: "240px",width:'100%'}} />
           </div>
         </div>
       </CSSTransition>
@@ -76,7 +76,7 @@ const ServiceCard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="container-fluid py-5" style={{ width: '85vw' }}>
+    <div className="container-fluid py-5" style={{ width: '90vw' }}>
       <div className="row ">
         <div
           id="carouselExampleIndicators2"
@@ -93,7 +93,7 @@ const ServiceCard = () => {
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
-          <TransitionGroup className="card-deck d-flex grid gap-4" style={{height:'215px'}}>{renderCards()}</TransitionGroup>
+          <TransitionGroup className="card-deck d-flex grid gap-4" style={{height:"240px"}}>{renderCards()}</TransitionGroup>
           <button
             className="btn btn-outline-light mb-3 next-btn"
             onClick={(e) => {

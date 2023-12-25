@@ -15,11 +15,11 @@ const BestService = () => {
   const cardsPerSlide = 3;
 
   const cardsData = [
-    { id: 1, imageUrl: Rectangle104, title: 'Expert haircut starting at ₹ 190' },
-    { id: 2, imageUrl: Rectangle105, title: 'Shine your bathroom deserves' },
-    { id: 3, imageUrl: Rectangle105, title: 'Expert haircut starting at ₹ 190' },
-    { id: 4, imageUrl: Rectangle104, title: 'Shine your bathroom deserves' },
-    { id: 5, imageUrl: Rectangle105, title: 'Expert haircut starting at ₹ 190' },
+    { id: 1, imageUrl: Rectangle104, title: 'Switch/socket replacement',price:78 },
+    { id: 2, imageUrl: Rectangle105, title: 'Classic bathroom cleaning',price:78 },
+    { id: 3, imageUrl: Rectangle105, title: 'Switch/socket replacement',price:78 },
+    { id: 4, imageUrl: Rectangle104, title: 'Classic bathroom cleanin',price:78 },
+    { id: 5, imageUrl: Rectangle105, title: 'Switch/socket replacement' ,price:78},
     // Add more cards as needed
   ];
 
@@ -45,18 +45,25 @@ const BestService = () => {
           exitActive: 'card-exit-active',
         }}
       >
-        <Card className="custom-card">
-          <CardMedia component="img" height="140" image={card.imageUrl} alt={card.title} />
+        <Card className="custom-card "style={{width:'26vw',borderRadius:'12px'}}>
+          <CardMedia component="img" height="250" image={card.imageUrl} alt={card.title} />
           <CardContent>
-            <Typography variant="h5" component="div">
+            <Typography variant="h5" component="div" style={{fontWeight:600}}>
               {card.title}
+            </Typography>
+          
+            <div className='d-flex justify-content-between'>
+            <Typography style={{fontSize:'28px'}}>
+             $ {card.price}
             </Typography>
             <Button
               variant="contained"
-              style={{ fontWeight: 600, fontSize: '15px', color: 'white', background: '#24346F', borderRadius: '30px' }}
+              style={{ fontWeight: 600, fontSize: '14px', color: 'white', background: '#2CAAC1', borderRadius: '30px' }}
             >
-              Book Now
+              Add
             </Button>
+            </div>
+         
           </CardContent>
         </Card>
       </CSSTransition>
@@ -72,8 +79,11 @@ const BestService = () => {
 //   }, [currentIndex]);
 
   return (
-    <div className="container-fluid py-5" style={{ width: '80vw',background: '#1F3584' }}>
+    <div className="container-fluid py-5" style={{ background: '#1F3584' }}>
       <div className="row ">
+        <div className='d-flex justify-content-center pb-3' style={{fontWeight:'bolder',color:'white'}}>
+          <h1>Most Booked Services</h1>
+        </div>
         <div
           id="carouselExampleIndicators2"
           className="carousel slide row container-fluid position-relative"
@@ -89,7 +99,7 @@ const BestService = () => {
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
-          <TransitionGroup className="card-deck d-flex grid gap-4">{renderCards()}</TransitionGroup>
+          <TransitionGroup className="card-deck d-flex justify-content-center grid gap-5">{renderCards()}</TransitionGroup>
           <button
             className="btn btn-outline-light mb-3 next-btn"
             onClick={(e) => {
