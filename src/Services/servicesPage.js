@@ -17,7 +17,7 @@ return(
     size="dekstop"
     text="Login"
   />
-    <div className="container-fluid min-vh-100">
+    <div className="container-fluid min-vh-100 px-0">
 <Divservices/>
 <Servicecard/>
 <BestService/>
