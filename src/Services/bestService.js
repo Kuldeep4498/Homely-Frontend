@@ -80,13 +80,13 @@ const BestService = () => {
 
   return (
     <div className="container-fluid py-5" style={{ background: '#1F3584' }}>
-      <div className="row ">
+
         <div className='d-flex justify-content-center pb-3' style={{fontWeight:'bolder',color:'white'}}>
           <h1>Most Booked Services</h1>
         </div>
         <div
           id="carouselExampleIndicators2"
-          className="carousel slide row container-fluid position-relative"
+          className="carousel slide position-relative"
           data-ride="carousel"
         >
           <button
@@ -110,7 +110,7 @@ const BestService = () => {
             <i className="fa fa-arrow-right fs-5" style={{ color: 'black' }} />
           </button>
         </div>
-      </div>
+     
     </div>
   );
 };

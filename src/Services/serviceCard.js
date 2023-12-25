@@ -76,12 +76,13 @@ const ServiceCard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="container-fluid py-5" style={{ width: '90vw' }}>
-      <div className="row ">
+    <div className="container-fluid py-5" >
+    
         <div
           id="carouselExampleIndicators2"
           className="carousel slide row container-fluid position-relative"
           data-ride="carousel"
+          style={{ width: '95vw' }}
         >
           <button
             className="btn btn-outline-light mb-3 prev-btn"
@@ -104,7 +105,7 @@ const ServiceCard = () => {
             <i className="fa fa-arrow-right fs-5" style={{ color: 'black' }} />
           </button>
         </div>
-      </div>
+   
     </div>
   );
 };
