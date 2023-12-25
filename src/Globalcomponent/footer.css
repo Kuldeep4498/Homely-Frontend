@@ -1,0 +1,293 @@
+.logo-replace-with-your-own {
+    position: relative;
+    width: 12.5rem;
+    height: 2.5rem;
+  }
+  .description1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .logo-description {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-5xl);
+  }
+  .bg {
+    position: absolute;
+    height: 87.5%;
+    width: 87.5%;
+    top: 6.25%;
+    right: 6.25%;
+    bottom: 6.25%;
+    left: 6.25%;
+    border-radius: var(--br-7xs);
+    background-color: var(--neutral-gray-500);
+  }
+  .instagram-icon {
+    position: absolute;
+    height: 62.5%;
+    width: 62.5%;
+    top: 18.75%;
+    right: 18.75%;
+    bottom: 18.75%;
+    left: 18.75%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .instagram {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .bg3 {
+    position: absolute;
+    height: 87.5%;
+    width: 87.5%;
+    top: 6.25%;
+    right: 6.25%;
+    bottom: 6.25%;
+    left: 6.25%;
+    border-radius: var(--br-37xl);
+    background-color: var(--neutral-gray-500);
+  }
+  .linked-in-icon {
+    position: absolute;
+    height: 43.75%;
+    width: 46.88%;
+    top: 25%;
+    right: 25%;
+    bottom: 31.25%;
+    left: 28.13%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+  }
+  .info3,
+  .social-icon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .social-icon {
+    align-self: stretch;
+    flex-direction: row;
+    gap: var(--gap-xs);
+  }
+  .info3 {
+
+    flex-direction: column;
+
+  }
+  .product {
+    position: relative;
+    line-height: 1.75rem;
+    font-weight: 500;
+    font-size: large;
+  }
+  .hexagon2-icon7 {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: none;
+  }
+  .button7 {
+    position: relative;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
+  .button12,
+  .button6 {
+    border-radius: var(--br-5xs);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-5xs);
+  }
+  .button6 {
+    display: flex;
+  }
+  .button12 {
+    display: none;
+  }
+  .footer-links {
+    text-align: left;
+    font-size: var(--paragraph-m-regular-size);
+    color: var(--neutral-gray-200);
+  }
+  .footer-links,
+  .footer-links-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .contact-us {
+    /* align-self: stretch;
+    position: relative; */
+    line-height: 1.75rem;
+    font-weight: 500;
+    font-size: large;
+  }
+  .email-icon,
+  .hexagon2-icon35 {
+    position: relative;
+    overflow: hidden;
+    height: 1.25rem;
+  }
+  .email-icon {
+    width: 1.25rem;
+    flex-shrink: 0;
+  }
+  .hexagon2-icon35 {
+    flex: 1;
+    max-width: 100%;
+    display: none;
+  }
+  .button34 {
+    align-self: stretch;
+    border-radius: var(--br-5xs);
+    display: flex;
+    flex-direction: row;
+    /* align-items: center;
+    justify-content: center; */
+    gap: var(--gap-5xs);
+  }
+  .saints-alley {
+    margin: 0;
+  }
+  .footer-links-column3,
+  .footer-links3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-base);
+  }
+  .footer-links3 {
+    align-self: stretch;
+    text-align: left;
+    font-size: var(--paragraph-m-regular-size);
+    color: var(--neutral-gray-200);
+  }
+  .footer-links-column3 {
+    width: 13.63rem;
+  }
+  .content3,
+  .links {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .links {
+    flex: 1;
+    justify-content: space-between;
+    text-align: center;
+  font-size: 20px;
+    color: var(--white);
+  }
+  .content3 {
+    align-self: stretch;
+    justify-content: flex-start;
+    gap: var(--gap-118xl);
+  }
+  .divider {
+    align-self: stretch;
+    position: relative;
+    border-bottom: 0.5px solid var(--Light, #FEFEFE);
+    height: 0.06rem;
+  }
+  .whitespace-ui- {
+    position: relative;
+    line-height: 1.5rem;
+    color: white;
+  }
+  .legal-child {
+    position: relative;
+    width: 0.06rem;
+    height: 1.06rem;
+    margin-left: 17px;
+    margin-right: 17px;
+  }
+  .bottom-info,
+  .legal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .legal {
+    align-items: center;
+    text-align: right;
+    color: var(--primary-500);
+  }
+  .bottom-info {
+    align-self: stretch;
+    align-items: flex-start;
+    color: var(--white);
+  }
+  .container,
+  .section {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    padding: var(--padding-21xl) 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-13xl);
+  }
+  .section {
+    padding: 0 var(--padding-93xl);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-section {
+
+flex-direction: column;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .logo {
+    height: 15.41%;
+    width: 17.01%;
+    top: 8.4%;
+    right: 76.94%;
+    bottom: 76.19%;
+    left: 6.04%;
+  }
+  .nexum-coffee-logo-high-resolut {
+    position: absolute;
+    height: 11.48%;
+    width: 16.99%;
+    top: 14.29%;
+    right: 75.09%;
+    bottom: 74.23%;
+    left: 7.92%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .footer {
+
+
+    height: 40vh;
+color: white;
+    font-size: var(--paragraph-m-regular-size);
+    background-color:#161616;
+    font-family: var(--paragraph-m-regular);
+  }
+  

@@ -9,7 +9,7 @@ import Rectangle92 from "../Images/Rectangle92.png";
 const Divservices = () => {
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: '#E7F0F9' }}>
-      <div className="container d-flex col-md-12 justify-content-center ">
+      <div className=" d-flex col-md-12 justify-content-center ">
         <div className="d-flex col-md-12 flex-column py-5" style={{height:'40rem',width:'80vw'}}>
         <div className="row" style={{height:'40em'}}>
           <div className="d-flex col-md-4 flex-column grid gap-3">

@@ -4,6 +4,7 @@ import { Navbar } from "../navbar";
 import { ReactComponent as ExampleLogo } from "../Images/Example Logo.svg";
 import Servicecard from "./serviceCard";
 import BestService from "./bestService";
+import Footer from "../Globalcomponent/footer";
 const servicespage = () =>{
 return(
     <>
@@ -21,7 +22,7 @@ return(
 <Divservices/>
 <Servicecard/>
 <BestService/>
-
+<Footer/>
     </div>
     </>
 )
