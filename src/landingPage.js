@@ -13,20 +13,59 @@ import beauty from "./Images/beauty.png"
 import Image from "./Images/Image.png";
 import Image2 from "./Images/Image2.png";
 import { Navbar } from "./navbar";
-import { TextField, InputAdornment} from "@mui/material";
+import broom from "./Images/broom.png"
+import facemask from "./Images/face-mask_1.png";
+import massage from "./Images/massage_1.png";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SearchIcon from "@mui/icons-material/Search";
-
+import IconButton from '@mui/material/IconButton';
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField, InputAdornment,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 const Landing = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState([]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const handleClearInput = () => {
-    setSearchTerm("");
-    setFilteredOptions([]);
-    setIsDropdownOpen(false);
-  };
+ 
+    const placeholders = [
+      "Search for products...",
+      "Find what you need...",
+      "Explore our catalog...",
+      // Add more placeholder messages as needed
+    ];
+  
+    const [placeholderIndex, setPlaceholderIndex] = useState(0);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    useEffect(() => {
+      // Set up an interval to rotate the placeholder every 2 seconds
+      const intervalId = setInterval(() => {
+        setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholders.length);
+      }, 2000);
+  
+      // Clear the interval when the component is unmounted
+      return () => clearInterval(intervalId);
+    }, [placeholderIndex]);
+  
+    const handleClearInput = () => {
+      setSearchTerm("");
+    };
+
+    const handleOpenDialog = () => {
+      setIsDialogOpen(true);
+    };
+  
+    const handleCloseDialog = () => {
+      setIsDialogOpen(false);
+    };
+  
 
   useEffect(() => {
     // Add animation classes to trigger the animation
@@ -87,62 +126,129 @@ const Landing = () => {
           </div>
         </div>
         <div className="col-md-12 d-flex justify-content-center mt-4 pb-4">
-          <TextField
-            variant="outlined"
-            //   value={searchTerm}
-            //   onChange={handleInputChange}
-            //   onClick={handelInputClick}
-            //   onKeyDown={handleEnterPress}
-            //   onBlur={handleInputBlur}
-            className=" search-bar-custom"
-            placeholder="What are you looking for ?"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  {searchTerm ? (
-                    <CancelIcon
-                      style={{ color: "#3169B7;", cursor: "pointer" }}
-                      onClick={handleClearInput}
-                    />
-                  ) : (
-                    <SearchIcon style={{ color: "#3169B7;" }} />
-                  )}
-                </InputAdornment>
-              ),
-              style: {
-                color: "#3169B7",
-                backgroundColor: "white",
-                height: "50px",
-                width: "33vw",
-                borderRadius:'20px'
-              },
-              classes: {
-                root: "white-placeholder",
-                input: "custom-placeholder",
-              },
+        <TextField
+        variant="outlined"
+        onClick={handleOpenDialog} 
+        className="search-bar-custom"
+        
+        placeholder={placeholders[placeholderIndex]}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              {searchTerm ? (
+                <CancelIcon
+                  style={{ color: "#3169B7", cursor: "pointer" }}
+                  onClick={handleClearInput}
+                />
+              ) : (
+                <SearchIcon style={{ color: "#3169B7", cursor: "pointer" }} />
+              )}
+            </InputAdornment>
+          ),
+          style: {
+            color: "#3169B7",
+            backgroundColor: "white",
+            height: "50px",
+            width: "33vw",
+            borderRadius: "20px",
+          },
+          classes: {
+            root: "white-placeholder",
+            input: "custom-placeholder",
+          },
+        }}
+      />
+
+<Dialog open={isDialogOpen} onClose={handleCloseDialog} fullWidth maxWidth="md">
+  <DialogTitle variant="h5" style={{fontWeight:600}}>What are you looking for?
+  <IconButton
+            aria-label="close"
+            onClick={handleCloseDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color:"black",
             }}
           />
-          {isDropdownOpen && (
-            <ul
-              className="list-group col-md-7 "
-              style={{
-                position: "absolute",
-                zIndex: "1",
-                maxheight: "400px",
-                overflowY: "auto",
-                cursor: "pointer",
-                fontSizesize: "15px",
-                width: "63.5vw",
-              }}
-            >
-              {filteredOptions.map((option) => (
-                <li className="list-group-item" key={option.product_id}>
-                  {option.name}, {option.farmer_name}, {option.region_name},{" "}
-                  {option.country_name}
-                </li>
-              ))}
-            </ul>
-          )}
+  </DialogTitle>
+  <DialogContent className="p-5">
+
+    <div style={{ display: 'flex', gap:'20px', marginBottom: '15px',justifyContent:'center' }}>
+      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+<div className="d-flex">
+<CardContent>
+          <Typography variant="h6">Cleaning</Typography>
+        </CardContent>
+     
+        <CardMedia component="img" alt="Card 1 Image" height="100"   style={{ objectFit: 'contain' }} image={broom}/>
+</div>
+       
+      </Card>
+       <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+        <div className="d-flex">
+        <CardContent>
+          <Typography variant="h6">Massage</Typography>
+        </CardContent>
+        {/* Right half with image */}
+        <CardMedia component="img" alt="Card 3 Image" height="100"   style={{ objectFit: 'contain' }} image={massage} />
+        </div>
+     
+      </Card>  
+      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+    <div className="d-flex">
+    <CardContent>
+          <Typography variant="h6">Spa</Typography>
+        </CardContent>
+
+        <CardMedia component="img" alt="Card 2 Image" height="100"   style={{ objectFit: 'contain' }} image={facemask} />
+    </div>
+        
+      </Card>
+    </div>
+
+    {/* Second Row */}
+    <div style={{ display: 'flex', gap:'20px',justifyContent:'center' }}>
+      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+        <div className="d-flex">
+        <CardContent>
+          <Typography variant="h6">Massage</Typography>
+        </CardContent>
+        {/* Right half with image */}
+        <CardMedia component="img" alt="Card 3 Image" height="100"   style={{ objectFit: 'contain' }} image={massage} />
+        </div>
+     
+      </Card>
+
+      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+        {/* Left half with text */}
+        <div className="d-flex">
+        <CardContent>
+          <Typography variant="h6">Massage</Typography>
+        </CardContent>
+        {/* Right half with image */}
+        <CardMedia component="img" alt="Card 4 Image" height="100"   style={{ objectFit: 'contain' }} image={massage}/>
+        </div>
+   
+      </Card>
+
+      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
+        {/* Left half with text */}
+        <div className="d-flex">
+        <CardContent>
+          <Typography variant="h6">Spa</Typography>
+        </CardContent>
+        {/* Right half with image */}
+        <CardMedia component="img" alt="Card 5 Image"  height="100"  style={{ objectFit: 'contain' }} image={facemask} />
+        </div>
+        
+      </Card>
+    </div>
+  </DialogContent>
+ 
+</Dialog>
+
+         
         </div>
 <div className="d-flex justify-content-center mt-4 pt-4">
 <div className="highlights grid gap-3 col-md-10">

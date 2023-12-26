@@ -5,13 +5,13 @@ import Rectangle86 from "../Images/Rectangle86.png";
 import Rectangle88 from "../Images/Rectangle88.png";
 import Rectangle90 from "../Images/Rectangle90.png";
 import Rectangle92 from "../Images/Rectangle92.png";
-
+import "./services.css"
 const Divservices = () => {
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: '#E7F0F9' }}>
       <div className=" d-flex col-md-12 justify-content-center ">
         <div className="d-flex col-md-12 flex-column py-5" style={{height:'40rem',width:'80vw'}}>
-        <div className="row" style={{height:'40em'}}>
+        <div className="row slide-in-left" style={{height:'40em'}}>
           <div className="d-flex col-md-4 flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column">
                 <div className="d-flex ">
@@ -27,8 +27,8 @@ const Divservices = () => {
              
               <div className="d-flex flex-column justify-content-center" style={{
                 color: '#002434',
-               lineHeight:"55px",
-                fontSize: '53px',
+               lineHeight:"50px",
+                fontSize: '50px',
                 fontWeight: 700,
               }}>
                 <p style={{ marginBottom: 0 }}>Our </p>
@@ -78,7 +78,7 @@ background:'#2CAAC1',height:'74px' ,color:'white',fontSize:'20px',fontWeight:700
          
           </div>
 
-          <div className="row" style={{height:'40em'}}>
+          <div className="row slide-in-right" style={{height:'40em'}}>
           <div className="col-md-4 mb-4">
               <div className="card" style={{ backgroundImage: `url(${Rectangle88})`, backgroundSize: "cover", overflow: "hidden", borderRadius: '20px',height:'100%' }}>
                 <div className="card-body p-0 d-flex align-items-end">

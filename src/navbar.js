@@ -107,6 +107,9 @@ export const Navbar = ({
     window.location.href="/"
    };
 
+   const handleaboutus = () => {
+    window.location.href="/aboutus"
+   };
 
   return (
     <div className={`navbar ${size} ${className}`}>
@@ -116,10 +119,10 @@ export const Navbar = ({
       </div>
 
       <div className="navigation col-md-6 justify-content-center">
-        <div className={`text-wrapper ${divClassName}`} style={{ cursor: 'pointer' }}>About Us</div>
+        <div className={`text-wrapper ${divClassName}`} style={{ cursor: 'pointer' }} onClick={handleaboutus}>About Us</div>
         <div className={`text-wrapper ${divClassNameOverride}`} style={{ cursor: 'pointer' }} onClick={handleservices}>Services</div>
         {hasDiv && <div className="text-wrapper">Our Blog</div>}
-        <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }}>Contact</div>
+        <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }}>Appointment</div>
       </div>
 
       <div className="element-services col-md-2 justify-content-center">
@@ -173,19 +176,20 @@ export const Navbar = ({
           )}
           <div style={{ marginTop: '10px' }}>
         
-            <span style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
-              Click here
-            </span>{' '}
-            to switch {showPhoneNumberInput ? 'to email.' : 'to phone number.'}
+            <h6 style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
+              Another way ?
+            </h6>
+          
           </div>
         </DialogContent>
         <DialogActions>
           <Button
             fullWidth
-            variant="contained"
-            color="primary"
+        
+            
             disabled={(!showPhoneNumberInput && !email) || (showPhoneNumberInput && (!phoneNumber || phoneNumber.length <= 1))}
             onClick={handleProceedToVerification}
+            style={{backgroundColor:'deepskyblue',color:'white'}}
           >
             Proceed
           </Button>

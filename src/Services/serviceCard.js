@@ -11,7 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 const ServiceCard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerSlide = 3;
-
+  const [slideIndex, setSlideIndex] = useState(0);
   const cardsData = [
     { id: 1, imageUrl: Rectangle104, title: 'Expert haircut starting at ₹ 190' },
     { id: 2, imageUrl: Rectangle105, title: 'Shine your bathroom deserves' },
@@ -31,13 +31,26 @@ const ServiceCard = () => {
     setCurrentIndex(prevIndex < 0 ? cardsData.length - cardsPerSlide : prevIndex);
   };
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSlideIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
+      showNextCards();
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
+
+  const handlecard = () =>{
+    window.location.href='/cart'
+  }
+
   const renderCards = () => {
     return cardsData.slice(currentIndex, currentIndex + cardsPerSlide).map((card, index) => (
       <CSSTransition
         key={card.id}
         timeout={{ enter: 500, exit: 0 }} // Adjust the enter duration as needed
         classNames={{
-          enter: index === 0 ? 'card-enter-first' : 'card-enter',
+          enter: slideIndex === 0 ? 'slide-in-right' : 'slide-in-left',
           enterActive: 'card-enter-active',
           exit: 'card-exit',
           exitActive: 'card-exit-active',
@@ -53,6 +66,7 @@ const ServiceCard = () => {
             <Button
               variant="contained"
               style={{ fontWeight: 600, fontSize: '15px', color: 'white', background: '#24346F', borderRadius: '30px' }}
+              onClick={handlecard}
             >
               Book Now
             </Button>
@@ -80,7 +94,7 @@ const ServiceCard = () => {
     
         <div
           id="carouselExampleIndicators2"
-          className="carousel slide row container-fluid position-relative"
+          className="carousel slide row container-fluid "
           data-ride="carousel"
           style={{ width: '95vw' }}
         >

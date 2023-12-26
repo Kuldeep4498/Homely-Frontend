@@ -46,3 +46,11 @@
     right: 20px; /* Adjust the right position as needed */
   }
   
+  .slide-in-left {
+    animation: slideInLeft 1s ease-in-out;
+  }
+  
+  .slide-in-right {
+    animation: slideInRight 1s ease-in-out;
+  }
+  

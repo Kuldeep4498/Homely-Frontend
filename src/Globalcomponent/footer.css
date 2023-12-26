@@ -229,8 +229,8 @@
     color: var(--primary-500);
   }
   .bottom-info {
-    align-self: stretch;
-    align-items: flex-start;
+   display: flex;
+    align-items: center;
     color: var(--white);
   }
   .container,
@@ -254,7 +254,7 @@
   .footer-section {
 
 flex-direction: column;
-
+gap: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,7 +284,7 @@ flex-direction: column;
   .footer {
 
 
-    height: 40vh;
+    height: 45vh;
 color: white;
     font-size: var(--paragraph-m-regular-size);
     background-color:#161616;

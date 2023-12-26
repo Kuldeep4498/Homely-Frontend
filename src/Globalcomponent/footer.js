@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import { ReactComponent as ExampleLogo } from "../Images/Example Logo.svg";
 const Footer = () => {
 
   // to guess the year
@@ -12,11 +12,13 @@ const Footer = () => {
       <div className="footer-section">
 
  
-            <div className="col-md-12 d-flex grid gap-5">
-              <div className="d-flex justify-content-center align-items-center col-md-4" >
- 
+            <div className="col-md-12 d-flex grid gap-5" style={{width:'80vw'}}>
+              <div className="d-flex justify-content-start flex-column align-items-center col-md-4 grid gap-3" >
+ <div className="d-flex align-items-center col-md-12">
+ <ExampleLogo/><span style={{fontSize:'25px',fontWeight:'bold'}}>Homely</span>
+ </div>
 
-                 
+                
                   <div className="description1">
                   Home Pro is your premier destination for top-notch smart home service and repair. 
                   </div>
@@ -61,7 +63,7 @@ const Footer = () => {
                 </div>
               
               </div>
-              <div className="d-flex justify-content-center col-md-4">
+              <div className="d-flex justify-content-center align-items-start col-md-4">
                 <div className="d-flex justify-content-evenly align-items-center col-md-6">
       
                    <i className="bi bi-facebook fs-4"></i>
@@ -77,13 +79,9 @@ const Footer = () => {
             <div className="divider"style={{}} />
             <div className="bottom-info">
               <div className="whitespace-ui-">
-                &copy; {currentYear} Nexum Coffee - All rights reserved
+                &copy; {currentYear} Homely - All rights reserved
               </div>
-              <div className="legal">
-                <div className="whitespace-ui-  border-end px-3">Terms of Service</div>
-              
-                <div className="whitespace-ui- px-3">Privacy Policy</div>
-              </div>
+            
             </div>
    
   

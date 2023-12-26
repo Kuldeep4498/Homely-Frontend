@@ -33,6 +33,10 @@ const BestService = () => {
     setCurrentIndex(prevIndex < 0 ? cardsData.length - cardsPerSlide : prevIndex);
   };
 
+  const handlecart = () =>{
+    window.location.href="/cart"
+  }
+
   const renderCards = () => {
     return cardsData.slice(currentIndex, currentIndex + cardsPerSlide).map((card, index) => (
       <CSSTransition
@@ -46,7 +50,7 @@ const BestService = () => {
         }}
       >
         <Card className="custom-card "style={{width:'26vw',borderRadius:'12px'}}>
-          <CardMedia component="img" height="250" image={card.imageUrl} alt={card.title} />
+          <CardMedia component="img" height="230" image={card.imageUrl} alt={card.title} />
           <CardContent>
             <Typography variant="h6" component="div" style={{fontWeight:600}}>
               {card.title}
@@ -58,6 +62,7 @@ const BestService = () => {
             </Typography>
             <Button
               variant="contained"
+              onClick={handlecart}
               style={{ fontWeight: 600, fontSize: '14px', color: 'white', background: '#2CAAC1', borderRadius: '30px' }}
             >
               Add
@@ -79,10 +84,10 @@ const BestService = () => {
 //   }, [currentIndex]);
 
   return (
-    <div className="container-fluid py-5" style={{ background: '#1F3584' }}>
+    <div className="container-fluid py-5" style={{ background: 'rgb(231, 240, 249)' }}>
 
-        <div className='d-flex justify-content-center pb-3' style={{fontWeight:'bolder',color:'white'}}>
-          <h1>Most Booked Services</h1>
+        <div className='d-flex justify-content-center pb-3' style={{fontWeight:'bolder',color:'rgb(0, 36, 52)'}}>
+          <h2>Most Booked Services</h2>
         </div>
         <div
           id="carouselExampleIndicators2"
