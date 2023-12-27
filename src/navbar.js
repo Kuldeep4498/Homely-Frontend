@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
+import axios from "axios";
 export const Navbar = ({
   size,
   className,
@@ -30,7 +30,8 @@ export const Navbar = ({
   const [verificationCode, setVerificationCode] = useState([]);
   const [timer, setTimer] = useState(30);
   const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
-
+  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const handleOpenLoginDialog = () => {
     setOpenLoginDialog(true);
     setShowPhoneNumberInput(true);
@@ -49,35 +50,103 @@ export const Navbar = ({
     setOpenVerificationDialog(false);
   };
 
+
   const handlePhoneNumberChange = (event) => {
     const input = event.target.value;
-    const numericInput = input.replace(/[^0-9]/g, '');
-    setPhoneNumber(numericInput);
+    setPhoneNumber(input);
+
+    // Validate phone number length
+    if (input.length > 10) {
+      setPhoneNumberError('Phone number cannot exceed 10 digits');
+    } else {
+      setPhoneNumberError('');
+    }
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const input = event.target.value;
+    setEmail(input);
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(input)) {
+      setEmailError('Invalid email format');
+    } else {
+      setEmailError('');
+    }
   };
 
   const handleVerificationCodeChangeForIndex = (event, index) => {
     const input = event.target.value;
-    const numericInput = input.replace(/[^0-9]/g, '');
+
     const newVerificationCode = [...verificationCode];
-    newVerificationCode[index - 1] = numericInput;
+    newVerificationCode[index - 1] = input;
     setVerificationCode(newVerificationCode);
   };
 
-  const handleProceedToVerification = () => {
-    handleCloseLoginDialog();
-    handleOpenVerificationDialog();
+  const handleProceedToVerification = async () => {
+    try {
+
+      const response = await axios.get(`http://localhost:8080/api/client/auth/requestOtp/${phoneNumber}`);
+
+
+      console.log("API Response:", response.data);
+
+      handleCloseLoginDialog();
+      handleOpenVerificationDialog();
+    } catch (error) {
+      // Handle errors
+      console.error("API Error:", error);
+
+    }
+
+  };
+  const handleProceedToVerificationemail = async () => {
+    try {
+
+      const response = await axios.post(`http://localhost:8080/api/register?email=${email}`);
+
+
+      console.log("API Response:", response.data);
+
+      handleCloseLoginDialog();
+   
+    } catch (error) {
+      // Handle errors
+      console.error("API Error:", error);
+
+    }
+
   };
 
-  const handleLogin = () => {
-    // Perform login logic here with phoneNumber and verificationCode
-    // For demonstration purposes, you can display an alert with the entered values
-    alert(`Login with\nPhone Number: ${phoneNumber}\nVerification Code: ${verificationCode.join('')}`);
-    handleCloseVerificationDialog();
+  const handleLogin = async () => {
+    try {
+
+      const response = await axios.post("http://localhost:8080/api/client/auth/verifyOtp",
+        {
+
+          otp: verificationCode.join(''),
+          phoneNo: phoneNumber,
+        }
+
+
+
+
+
+      );
+
+
+      console.log("API Response:", response.data);
+
+      handleCloseVerificationDialog();
+    } catch (error) {
+      // Handle errors
+      console.error("API Error:", error);
+
+    }
+
   };
+
 
   const startTimer = () => {
     setTimer(30);
@@ -100,16 +169,16 @@ export const Navbar = ({
   };
 
   const handleservices = () => {
-   window.location.href="/services"
+    window.location.href = "/services"
   };
 
   const handlehome = () => {
-    window.location.href="/"
-   };
+    window.location.href = "/"
+  };
 
-   const handleaboutus = () => {
-    window.location.href="/aboutus"
-   };
+  const handleaboutus = () => {
+    window.location.href = "/aboutus"
+  };
 
   return (
     <div className={`navbar ${size} ${className}`}>
@@ -132,69 +201,81 @@ export const Navbar = ({
 
       {/* Login Dialog */}
       <Dialog open={openLoginDialog} onClose={handleCloseLoginDialog} fullWidth maxWidth="xs">
-        <DialogTitle>
-          Login/Signup
-          <IconButton
-            aria-label="close"
-            onClick={handleCloseLoginDialog}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          {showPhoneNumberInput && (
-            <>
-              <TextField
-                label="Phone Number"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={phoneNumber}
-                onChange={handlePhoneNumberChange}
-              />
-              <FormControlLabel
-                control={<Checkbox id="orderUpdates" />}
-                label="Receive order updates"
-              />
-            </>
-          )}
-          {!showPhoneNumberInput && (
-            <TextField
-              label="Email"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          )}
-          <div style={{ marginTop: '10px' }}>
-        
-            <h6 style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
-              Another way ?
-            </h6>
-          
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            fullWidth
-        
-            
-            disabled={(!showPhoneNumberInput && !email) || (showPhoneNumberInput && (!phoneNumber || phoneNumber.length <= 1))}
-            onClick={handleProceedToVerification}
-            style={{backgroundColor:'deepskyblue',color:'white'}}
-          >
-            Proceed
-          </Button>
-        </DialogActions>
-      </Dialog>
+  <DialogTitle>
+    Login/Signup
+    <IconButton
+      aria-label="close"
+      onClick={handleCloseLoginDialog}
+      sx={{
+        position: 'absolute',
+        right: 8,
+        top: 8,
+        color: (theme) => theme.palette.grey[500],
+      }}
+    >
+      <CloseIcon />
+    </IconButton>
+  </DialogTitle>
+  <DialogContent>
+    {showPhoneNumberInput && (
+      <>
+        <TextField
+          label="Phone Number"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
+          error={Boolean(phoneNumberError)}
+          helperText={phoneNumberError}
+        />
+        <FormControlLabel
+          control={<Checkbox id="orderUpdates" />}
+          label="Receive order updates"
+        />
+      </>
+    )}
+    {!showPhoneNumberInput && (
+      <TextField
+        label="Email"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={email}
+        onChange={handleEmailChange}
+        error={Boolean(emailError)}
+        helperText={emailError}
+      />
+    )}
+    <div style={{ marginTop: '10px' }}>
+      <h6 style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
+        Another way ?
+      </h6>
+    </div>
+  </DialogContent>
+  <DialogActions>
+    {showPhoneNumberInput ? (
+      <Button
+        fullWidth
+        disabled={!phoneNumber || phoneNumber.length <= 1}
+        onClick={handleProceedToVerification}
+        style={{ backgroundColor: 'deepskyblue', color: 'white' }}
+      >
+        Proceed
+      </Button>
+    ) : (
+      <Button
+        fullWidth
+        disabled={!email}
+        onClick={handleProceedToVerificationemail}
+        style={{ backgroundColor: 'darkblue', color: 'white' }}
+      >
+        Proceed
+      </Button>
+    )}
+  </DialogActions>
+</Dialog>
+
 
       {/* Verification Dialog */}
       <Dialog open={openVerificationDialog} onClose={handleCloseVerificationDialog} fullWidth maxWidth="xs">
@@ -228,7 +309,7 @@ export const Navbar = ({
           )}
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            {[1, 2, 3, 4].map((index) => (
+            {[1, 2, 3, 4, 5, 6].map((index) => (
               <TextField
                 key={index}
                 variant="outlined"
@@ -248,7 +329,7 @@ export const Navbar = ({
             fullWidth
             variant="contained"
             color="primary"
-            disabled={verificationCode.length !== 4 || verificationCode.includes('')}
+            disabled={verificationCode.length !== 6 || verificationCode.includes('')}
             onClick={handleLogin}
           >
             Login

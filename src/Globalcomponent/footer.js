@@ -76,7 +76,7 @@ const Footer = () => {
               
               </div>
             </div>
-            <div className="divider"style={{}} />
+           
             <div className="bottom-info">
               <div className="whitespace-ui-">
                 &copy; {currentYear} Homely - All rights reserved
