@@ -7,6 +7,7 @@ import { ReactComponent as Tick } from "./Images/tick.svg.svg";
 import about from "./Images/about-three-imag-1.png.png";
 import about2 from "./Images/about-three-shape1.png.png";
 import "./aboutUs.css"
+import Button from '@mui/material/Button';
 const AboutUs = () =>{
 
     useEffect(() => {
@@ -55,7 +56,7 @@ return(
           <div class="box-2 d-flex justify-content-center align-items-center col-md-6">
             <div class="box-inner-2 p-4 border-2 d-flex flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column grid gap-3">
-            <div className="d-flex col-md-12 flex-column">
+            <div className="d-flex grid gap-2 col-md-12 flex-column">
                 <div className="d-flex ">
                 <Icon2 />
               <span style={{
@@ -69,8 +70,8 @@ return(
              
               <div className="d-flex flex-column justify-content-center" style={{
                 color: '#002434',
-               lineHeight:"50px",
-                fontSize: '50px',
+               lineHeight:"40px",
+                fontSize: '40px',
                 fontWeight: 700,
               }}>
                 <p style={{ marginBottom: 0 }}>Best & Quality  Services Providers </p>
@@ -114,6 +115,18 @@ eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
         </div>
 
 
+                </div>
+                <div className='d-flex  justify-content-between'>
+<div className='d-flex col-md-4 '>
+    <Button style={{borderRadius: '30px',
+background: '#1F3584',color:'white',width:'100%'}}>
+        Learn More
+    </Button>
+</div>
+<div className='d-flex flex-column col-md-4'>
+<p className='mb-0' style={{fontSize:'12px'}}>Need Help ? Contact Number</p>
+<p className='mb-0' style={{fontWeight:'bold'}}>(808) 555-0111</p>
+</div>
                 </div>
             </div>
           </div>

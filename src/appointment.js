@@ -57,7 +57,7 @@ return(
           <div class="box-2 d-flex justify-content-center align-items-center col-md-6">
             <div class="box-inner-2 p-4 border-2 d-flex flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column grid gap-3">
-            <div className="d-flex col-md-12 flex-column">
+            <div className="d-flex grid gap-2 col-md-12 flex-column">
                 <div className="d-flex ">
                 <Icon2 />
               <span style={{
@@ -71,8 +71,8 @@ return(
              
               <div className="d-flex flex-column justify-content-center" style={{
                 color: '#002434',
-               lineHeight:"50px",
-                fontSize: '50px',
+               lineHeight:"40px",
+                fontSize: '40px',
                 fontWeight: 700,
               }}>
                 <p style={{ marginBottom: 0 }}>Schedule A Services </p>
