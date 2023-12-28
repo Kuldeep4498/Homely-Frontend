@@ -19,7 +19,7 @@ const ShoppingCartItem = ({ product }) => {
               component="img"
               alt="Product Image"
               src={product.imageSrc}
-              style={{height:'160px',width:'240px'}}
+              style={{height:'100%',width:'240px'}}
             />
           </div>
 

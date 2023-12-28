@@ -5,7 +5,7 @@ import { ReactComponent as ExampleLogo } from "./Images/Example Logo.svg";
 import { ReactComponent as Icon2 } from "./Images/Icon.svg";
 import { ReactComponent as Tick } from "./Images/tick.svg.svg";
 import about from "./Images/make-appointment-img.png.png";
-import about2 from "./Images/about-three-shape1.png.png";
+import about2 from "./Images/make-appointment-shape.png.png";
 import "./aboutUs.css"
 import Button from '@mui/material/Button';
 
@@ -40,7 +40,7 @@ return(
           src={about2}
           alt="About2 Image"
           className="slide-in"
-          style={{ width: '400px', height: '450px' }}
+          style={{ width: '350px', height: '430px' }}
         />
       </div>
       <div className="slide-container bottom">
@@ -48,7 +48,7 @@ return(
           src={about}
           alt="About Image"
           className="slide-in"
-          style={{ width: '400px', height: '450px' }}
+          style={{ width: '350px', height: '430px' }}
         />
       </div>
     </div>
