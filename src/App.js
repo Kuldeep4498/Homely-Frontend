@@ -4,6 +4,7 @@ import Landing from "./landingPage"; // Assuming Landing is your component
 import Service from "./Services/servicesPage"
 import HomeServicesCart from "./Shoppingcart/shoppingItem";
 import AboutUs from "./aboutUs";
+import Appointment from "./appointment";
 function App() {
   return (
     <Router>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/services" element={<Service />} />
         <Route path="/cart" element={<HomeServicesCart />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/appointment" element={<Appointment />} />
       </Routes>
     </Router>
   );

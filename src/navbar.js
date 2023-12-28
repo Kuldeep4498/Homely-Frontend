@@ -13,6 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
+
 export const Navbar = ({
   size,
   className,
@@ -25,16 +26,16 @@ export const Navbar = ({
 }) => {
   const [openLoginDialog, setOpenLoginDialog] = useState(false);
   const [openVerificationDialog, setOpenVerificationDialog] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [verificationCode, setVerificationCode] = useState([]);
   const [timer, setTimer] = useState(30);
-  const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
-  const [phoneNumberError, setPhoneNumberError] = useState('');
-  const [emailError, setEmailError] = useState('');
+
+const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
+
+  const [identifier,setidentifier] = useState("");
   const handleOpenLoginDialog = () => {
     setOpenLoginDialog(true);
-    setShowPhoneNumberInput(true);
+
   };
 
   const handleCloseLoginDialog = () => {
@@ -50,31 +51,15 @@ export const Navbar = ({
     setOpenVerificationDialog(false);
   };
 
-
-  const handlePhoneNumberChange = (event) => {
-    const input = event.target.value;
-    setPhoneNumber(input);
-
-    // Validate phone number length
-    if (input.length > 10) {
-      setPhoneNumberError('Phone number cannot exceed 10 digits');
-    } else {
-      setPhoneNumberError('');
-    }
+  const handleToggleInput = () => {
+    setShowPhoneNumberInput((prevValue) => !prevValue);
   };
 
-  const handleEmailChange = (event) => {
-    const input = event.target.value;
-    setEmail(input);
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(input)) {
-      setEmailError('Invalid email format');
-    } else {
-      setEmailError('');
-    }
-  };
+  const handleIdentifier = (event) =>{
+const input = event.target.value
+setidentifier(input)
+  }
 
   const handleVerificationCodeChangeForIndex = (event, index) => {
     const input = event.target.value;
@@ -84,10 +69,11 @@ export const Navbar = ({
     setVerificationCode(newVerificationCode);
   };
 
-  const handleProceedToVerification = async () => {
+
+  const handleProceed= async () => {
     try {
 
-      const response = await axios.get(`http://localhost:8080/api/client/auth/requestOtp/${phoneNumber}`);
+      const response = await axios.get(`http://localhost:8080/api/client/auth/requestOtp/${identifier}`);
 
 
       console.log("API Response:", response.data);
@@ -101,23 +87,7 @@ export const Navbar = ({
     }
 
   };
-  const handleProceedToVerificationemail = async () => {
-    try {
 
-      const response = await axios.post(`http://localhost:8080/api/register?email=${email}`);
-
-
-      console.log("API Response:", response.data);
-
-      handleCloseLoginDialog();
-   
-    } catch (error) {
-      // Handle errors
-      console.error("API Error:", error);
-
-    }
-
-  };
 
   const handleLogin = async () => {
     try {
@@ -126,7 +96,7 @@ export const Navbar = ({
         {
 
           otp: verificationCode.join(''),
-          phoneNo: phoneNumber,
+          identifier: identifier,
         }
 
 
@@ -164,10 +134,7 @@ export const Navbar = ({
     startTimer();
   };
 
-  const handleToggleInput = () => {
-    setShowPhoneNumberInput((prevValue) => !prevValue);
-  };
-
+ 
   const handleservices = () => {
     window.location.href = "/services"
   };
@@ -180,6 +147,14 @@ export const Navbar = ({
     window.location.href = "/aboutus"
   };
 
+  const handleappointment = () => {
+    window.location.href = "/appointment"  };  
+
+    const handleLogout = () => {
+      // Add logic to handle logout
+      setIsLoggedIn(false);
+    };
+
   return (
     <div className={`navbar ${size} ${className}`}>
       <div className="d-flex align-items-center col-md-2 justify-content-center" onClick={handlehome}>
@@ -191,12 +166,24 @@ export const Navbar = ({
         <div className={`text-wrapper ${divClassName}`} style={{ cursor: 'pointer' }} onClick={handleaboutus}>About Us</div>
         <div className={`text-wrapper ${divClassNameOverride}`} style={{ cursor: 'pointer' }} onClick={handleservices}>Services</div>
         {hasDiv && <div className="text-wrapper">Our Blog</div>}
-        <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }}>Appointment</div>
+        <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }} onClick={handleappointment}>Appointment</div>
       </div>
 
       <div className="element-services col-md-2 justify-content-center">
         <div className="shape" />
-        <div className="element-hour-services" style={{ cursor: 'pointer' }} onClick={handleOpenLoginDialog}>{text}</div>
+        {isLoggedIn ? (
+          // Render user information if logged in
+          <div>
+            <div>Username</div>
+            <div>User Image</div>
+            <Button onClick={handleLogout}>Logout</Button>
+          </div>
+        ) : (
+          // Render login button if not logged in
+          <div className="element-hour-services" style={{ cursor: "pointer" }} onClick={handleOpenLoginDialog}>
+            Login
+          </div>
+        )}
       </div>
 
       {/* Login Dialog */}
@@ -224,10 +211,9 @@ export const Navbar = ({
           variant="outlined"
           fullWidth
           margin="normal"
-          value={phoneNumber}
-          onChange={handlePhoneNumberChange}
-          error={Boolean(phoneNumberError)}
-          helperText={phoneNumberError}
+          value={identifier}
+          onChange={handleIdentifier}
+
         />
         <FormControlLabel
           control={<Checkbox id="orderUpdates" />}
@@ -241,10 +227,9 @@ export const Navbar = ({
         variant="outlined"
         fullWidth
         margin="normal"
-        value={email}
-        onChange={handleEmailChange}
-        error={Boolean(emailError)}
-        helperText={emailError}
+        value={identifier}
+        onChange={handleIdentifier}
+ 
       />
     )}
     <div style={{ marginTop: '10px' }}>
@@ -257,8 +242,8 @@ export const Navbar = ({
     {showPhoneNumberInput ? (
       <Button
         fullWidth
-        disabled={!phoneNumber || phoneNumber.length <= 1}
-        onClick={handleProceedToVerification}
+        disabled={!identifier || identifier.length <= 1}
+        onClick={handleProceed}
         style={{ backgroundColor: 'deepskyblue', color: 'white' }}
       >
         Proceed
@@ -266,8 +251,8 @@ export const Navbar = ({
     ) : (
       <Button
         fullWidth
-        disabled={!email}
-        onClick={handleProceedToVerificationemail}
+        disabled={!identifier}
+        onClick={handleProceed}
         style={{ backgroundColor: 'darkblue', color: 'white' }}
       >
         Proceed

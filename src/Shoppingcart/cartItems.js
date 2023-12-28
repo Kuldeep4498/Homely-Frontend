@@ -1,7 +1,14 @@
 import React from "react";
 import { Card, CardMedia, Typography,Button } from "@mui/material";
+import ButtonGroup from '@mui/material/ButtonGroup';
 
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import Badge from '@mui/material/Badge';
 const ShoppingCartItem = ({ product }) => {
+
+    const [count, setCount] = React.useState(1);
+
   return (
 
       <Card className="cart-items-card" style={{width:'100%'}}>
@@ -44,13 +51,25 @@ const ShoppingCartItem = ({ product }) => {
               </Typography>
                 </div>
           <div  className="col-md-4 d-flex justify-content-center">
+         <ButtonGroup>
           <Button
-              variant="contained"
-         
-              style={{ fontWeight: 600, fontSize: '14px', color: 'white', background: '#2CAAC1', borderRadius: '30px' }}
-            >
-              {product.Button}
-            </Button>
+            aria-label="reduce"
+            onClick={() => {
+              setCount(Math.max(count - 1, 0));
+            }}
+          >
+            <RemoveIcon fontSize="small" />
+          </Button>
+          <Badge color="secondary" badgeContent={count}/>
+          <Button
+            aria-label="increase"
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            <AddIcon fontSize="small" />
+          </Button>
+        </ButtonGroup>
           </div>
              
             </div>

@@ -4,10 +4,12 @@ import Footer from "./Globalcomponent/footer";
 import { ReactComponent as ExampleLogo } from "./Images/Example Logo.svg";
 import { ReactComponent as Icon2 } from "./Images/Icon.svg";
 import { ReactComponent as Tick } from "./Images/tick.svg.svg";
-import about from "./Images/about-three-imag-1.png.png";
+import about from "./Images/make-appointment-img.png.png";
 import about2 from "./Images/about-three-shape1.png.png";
 import "./aboutUs.css"
-const AboutUs = () =>{
+import Button from '@mui/material/Button';
+
+const Appointment = () =>{
 
     useEffect(() => {
         const images = document.querySelectorAll('.slide-in');
@@ -38,7 +40,7 @@ return(
           src={about2}
           alt="About2 Image"
           className="slide-in"
-          style={{ width: '500px', height: '500px' }}
+          style={{ width: '400px', height: '450px' }}
         />
       </div>
       <div className="slide-container bottom">
@@ -46,7 +48,7 @@ return(
           src={about}
           alt="About Image"
           className="slide-in"
-          style={{ width: '500px', height: '500px' }}
+          style={{ width: '400px', height: '450px' }}
         />
       </div>
     </div>
@@ -64,7 +66,7 @@ return(
                 fontSize: '19.385px',
                 fontWeight: 500,
                 lineHeight: '24.578px',
-              }}>About Us</span>
+              }}>Make Appointment</span>
                 </div>
              
               <div className="d-flex flex-column justify-content-center" style={{
@@ -73,7 +75,7 @@ return(
                 fontSize: '50px',
                 fontWeight: 700,
               }}>
-                <p style={{ marginBottom: 0 }}>Best & Quality  Services Providers </p>
+                <p style={{ marginBottom: 0 }}>Schedule A Services </p>
         
               </div>
             </div>
@@ -91,30 +93,72 @@ eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
                </p>
             </div>
           </div>
-          <div className="d-flex flex-column grid gap-3">
-            <div>
-            <Tick />
-              <span style={{
-                color: '#002434',
-           
-                fontSize: '17.385px',
-                fontWeight: 500,
-                lineHeight: '24.578px',
-              }}>First Class Quality Service at Affordable Prices</span>   
-            </div>
-        <div>
-        <Tick />
-              <span style={{
-                color: '#002434',
-           
-                fontSize: '17.385px',
-                fontWeight: 500,
-                lineHeight: '24.578px',
-              }}>First Class Quality Service at Affordable Prices</span>
-        </div>
 
-
+            <div className='col-md-12 flex-column d-flex grid gap-2'>
+                <div className='col-md-12 d-flex grid gap-2'>
+                <div className='col-md-6'>
+          <input
+                        className="form-control border-secondary"
+                        placeholder="Name"
+                      
+                      />
+         
+          </div>
+          <div className='col-md-6'>
+          <input
+                        className="form-control border-secondary"
+                        placeholder="Email"
+                      
+                      />
+         
+          </div>
                 </div>
+          
+                <div className='col-md-12 d-flex grid gap-2'>
+                <div className='col-md-6'>
+          <input
+                        className="form-control border-secondary"
+                        placeholder="Phone Number"
+                      
+                      />
+         
+          </div>
+          <div className='col-md-6'>
+          <input
+                        className="form-control border-secondary"
+                        placeholder="Select Date"
+                      
+                      />
+         
+          </div>
+                </div>
+          <div className='col-md-12 d-flex grid gap-2'>
+          <input
+                        className="form-control border-secondary"
+                        placeholder="Installation"
+                      
+                      />
+         
+          </div>
+          <div className='col-md-12 d-flex grid gap-2'>
+          <textarea
+                    className="form-control border-secondary"
+                    id="nameInput"
+                    placeholder="Message"
+                   
+                  />
+         
+          </div>
+          <div className='col-md-12 d-flex grid gap-2'>
+        <Button style={{borderRadius: '30px',
+background: '#1F3584',color:'white',width:'100%'}}> Make an Appointment</Button>
+         
+          </div>
+            </div>
+          
+
+
+            
             </div>
           </div>
         </div>
@@ -123,4 +167,4 @@ eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
  </>  
 )
 }
-export default AboutUs;
+export default Appointment;
