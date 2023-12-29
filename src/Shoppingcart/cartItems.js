@@ -13,17 +13,17 @@ const ShoppingCartItem = ({ product }) => {
 
       <Card className="cart-items-card" style={{width:'100%'}}>
         <div className="col-md-12 d-flex align-items-center grid gap-2" style={{height:'180px'}}>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <CardMedia
               className="cart-items-image"
               component="img"
               alt="Product Image"
               src={product.imageSrc}
-              style={{height:'100%',width:'240px'}}
+         
             />
           </div>
 
-          <div className="col-md-8 d-flex flex-column grid gap-3">
+          <div className="col-md-9 d-flex flex-column grid gap-3">
             <div className="row">
               <Typography component="h5" variant="h5" className="cart-items-name">
                 {product.name}
