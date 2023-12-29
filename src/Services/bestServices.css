@@ -21,4 +21,37 @@
   .card-body {
     padding: 10px;
   }
+  .custom-card {
+    transition: transform 0.3s ease-in-out;
+  }
   
+  .custom-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-enter-first {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  .card-enter-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .card-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .card-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .custom-card {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.05);
+  }

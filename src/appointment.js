@@ -34,13 +34,13 @@ return(
         style={{ boxSizing: "border-box" }}
       >
         <div className="col-md-12 d-flex justify-content-center container-fluid grid gap-3" style={{height:'40rem'}}>
-        <div className="box-1 user col-md-6" style={{ position: 'relative' }}>
+        <div className="box-1 user col-md-7" style={{ position: 'relative' }}>
       <div className="slide-container top">
         <img
           src={about2}
           alt="About2 Image"
           className="slide-in"
-          style={{ width: '350px', height: '430px' }}
+          style={{ width: '430px', height: '500px' }}
         />
       </div>
       <div className="slide-container bottom">
@@ -48,13 +48,13 @@ return(
           src={about}
           alt="About Image"
           className="slide-in"
-          style={{ width: '350px', height: '430px' }}
+          style={{ width: '430px', height: '500px' }}
         />
       </div>
     </div>
 
 
-          <div class="box-2 d-flex justify-content-center align-items-center col-md-6">
+          <div class="box-2 d-flex justify-content-center align-items-center col-md-5">
             <div class="box-inner-2 p-4 border-2 d-flex flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column grid gap-3">
             <div className="d-flex grid gap-2 col-md-12 flex-column">

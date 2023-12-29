@@ -9,19 +9,24 @@ import './serviceCard.css'; // Import your CSS file
 import Rectangle104 from "../Images/Rectangle104.png";
 import Rectangle105 from "../Images/Rectangle105.png";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import axios from 'axios';
 const BestService = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerSlide = 3;
+  const [cardsData, setCardsData] = useState([]);
 
-  const cardsData = [
-    { id: 1, imageUrl: Rectangle104, title: 'Switch/socket replacement',price:78 },
-    { id: 2, imageUrl: Rectangle105, title: 'Classic bathroom cleaning',price:78 },
-    { id: 3, imageUrl: Rectangle105, title: 'Switch/socket replacement',price:78 },
-    { id: 4, imageUrl: Rectangle104, title: 'Classic bathroom cleanin',price:78 },
-    { id: 5, imageUrl: Rectangle105, title: 'Switch/socket replacement' ,price:78},
-    // Add more cards as needed
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/homely-services"); // Replace with your API endpoint
+        setCardsData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const showNextCards = () => {
     const nextIndex = currentIndex + cardsPerSlide;
@@ -50,10 +55,10 @@ const BestService = () => {
         }}
       >
         <Card className="custom-card "style={{width:'26vw',borderRadius:'12px'}}>
-          <CardMedia component="img" height="230" image={card.imageUrl} alt={card.title} />
+          <CardMedia component="img" height="210" image={card.imgUrl} alt={card.title} />
           <CardContent>
             <Typography variant="h6" component="div" style={{fontWeight:600}}>
-              {card.title}
+              {card.serviceName}
             </Typography>
           
             <div className='d-flex justify-content-between'>

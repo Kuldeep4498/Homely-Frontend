@@ -39,7 +39,7 @@ return(
           src={about2}
           alt="About2 Image"
           className="slide-in"
-          style={{ width: '370px', height: '400px' }}
+          style={{ width: '470px', height: '500px' }}
         />
       </div>
       <div className="slide-container bottom">
@@ -47,7 +47,7 @@ return(
           src={about}
           alt="About Image"
           className="slide-in"
-          style={{ width: '370px', height: '400px' }}
+          style={{ width: '470px', height: '500px' }}
         />
       </div>
     </div>

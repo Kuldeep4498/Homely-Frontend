@@ -5,21 +5,27 @@ import Rectangle104 from "../Images/Rectangle104.png";
 import Rectangle105 from "../Images/Rectangle105.png";
 import Button from '@mui/material/Button';
 import './serviceCard.css'; // Import your CSS file
-
+import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const ServiceCard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerSlide = 3;
   const [slideIndex, setSlideIndex] = useState(0);
-  const cardsData = [
-    { id: 1, imageUrl: Rectangle104, title: 'Expert haircut starting at ₹ 190' },
-    { id: 2, imageUrl: Rectangle105, title: 'Shine your bathroom deserves' },
-    { id: 3, imageUrl: Rectangle104, title: 'Expert haircut starting at ₹ 190' },
-    { id: 4, imageUrl: Rectangle105, title: 'Shine your bathroom deserves' },
-    { id: 5, imageUrl: Rectangle104, title: 'Expert haircut starting at ₹ 190' },
-    // Add more cards as needed
-  ];
+  const [cardsData, setCardsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/homely-services"); // Replace with your API endpoint
+        setCardsData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const showNextCards = () => {
     const nextIndex = currentIndex + cardsPerSlide;
@@ -43,7 +49,9 @@ const ServiceCard = () => {
   const handlecard = () =>{
     window.location.href='/cart'
   }
-
+  const convertStringToImage = (imageString) => {
+    return `data:image/png;base64,${imageString}`;
+  };
   const renderCards = () => {
     return cardsData.slice(currentIndex, currentIndex + cardsPerSlide).map((card, index) => (
       <CSSTransition
@@ -59,8 +67,8 @@ const ServiceCard = () => {
         <div className="col-md-4 col-sm-6 d-flex" style={{ backgroundColor: '#142257', borderRadius: '14px' }}>
           <div className="d-flex justify-content-center flex-column col-md-6 align-items-center grid gap-4">
             <div className='text-center'>
-              <h4 className='mb-0' style={{ fontWeight: 'bold', fontSize: '19px', cursor: 'pointer', color: 'white' }}>
-                {card.title}
+              <h4 className='mb-0' style={{ fontWeight: 'bold', fontSize: '17px', cursor: 'pointer', color: 'white' }}>
+                {card.description}
               </h4>
             </div>
             <Button
@@ -72,7 +80,8 @@ const ServiceCard = () => {
             </Button>
           </div>
           <div className='d-flex justify-content-end col-md-6 align-items-center'>
-            <img src={card.imageUrl} alt="" style={{ height: "240px",width:'100%'}} />
+            <img src={ card.imgUrl} alt="" style={{ height: "240px",width:'100%'}} />
+          {console.log("image",card.imgUrl)}
           </div>
         </div>
       </CSSTransition>
@@ -94,7 +103,7 @@ const ServiceCard = () => {
     
         <div
           id="carouselExampleIndicators2"
-          className="carousel slide row container-fluid "
+          className="carousel slide container-fluid "
           data-ride="carousel"
           style={{ width: '95vw' }}
         >
@@ -109,7 +118,7 @@ const ServiceCard = () => {
           >
             <i className="fa fa-arrow-left fs-5" style={{ color: 'black' }}></i>
           </button>
-          <TransitionGroup className="card-deck d-flex grid gap-4" style={{height:"240px"}}>{renderCards()}</TransitionGroup>
+          <TransitionGroup className="card-deck d-flex grid gap-4" style={{height:"240px",width:'90vw'}}>{renderCards()}</TransitionGroup>
           <button
             className="btn btn-outline-light mb-3 next-btn"
             onClick={(e) => {
