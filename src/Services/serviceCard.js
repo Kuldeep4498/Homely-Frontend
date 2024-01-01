@@ -97,7 +97,7 @@ const ServiceCard = () => {
             </Button>
           </CardContent>
           <div className=' col-md-6 d-flex justify-content-end align-items-center'>
-            <img src={card.imgUrl} alt="" style={{ height: '240px', width: '100%' }} />
+            <img src={card.imgUrl} alt="" style={{ height: '100%', width: '100%' }} />
           </div>
         </Card>
       </CSSTransition>
