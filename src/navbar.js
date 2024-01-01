@@ -13,7 +13,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 export const Navbar = ({
   size,
   className,
@@ -29,10 +31,10 @@ export const Navbar = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [verificationCode, setVerificationCode] = useState([]);
   const [timer, setTimer] = useState(30);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
 
-const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
-
-  const [identifier,setidentifier] = useState("");
+  const [identifier, setidentifier] = useState("");
   const handleOpenLoginDialog = () => {
     setOpenLoginDialog(true);
 
@@ -54,23 +56,38 @@ const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
   const handleToggleInput = () => {
     setShowPhoneNumberInput((prevValue) => !prevValue);
   };
+  const handleOpenMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
-  const handleIdentifier = (event) =>{
-const input = event.target.value
-setidentifier(input)
+  const handleIdentifier = (event) => {
+    const input = event.target.value
+    setidentifier(input)
   }
 
   const handleVerificationCodeChangeForIndex = (event, index) => {
     const input = event.target.value;
-
+  
     const newVerificationCode = [...verificationCode];
     newVerificationCode[index - 1] = input;
     setVerificationCode(newVerificationCode);
+  
+    // Automatically move to the next input field
+    if (index < 6 && input !== "") {
+      const nextInput = document.getElementById(`verification-code-${index + 1}`);
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
   };
+  
 
 
-  const handleProceed= async () => {
+  const handleProceed = async () => {
     try {
 
       const response = await axios.get(`http://localhost:8080/api/client/auth/requestOtp/${identifier}`);
@@ -91,30 +108,40 @@ setidentifier(input)
 
   const handleLogin = async () => {
     try {
-
-      const response = await axios.post("http://localhost:8080/api/client/auth/verifyOtp",
-        {
-
-          otp: verificationCode.join(''),
-          identifier: identifier,
-        }
-
-
-
-
-
-      );
-
+      const response = await axios.post("http://localhost:8080/api/client/auth/verifyOtp", {
+        otp: verificationCode.join(''),
+        identifier: identifier,
+      });
 
       console.log("API Response:", response.data);
 
-      handleCloseVerificationDialog();
+      // Check if the login is successful
+      if (response.data.status === "success") {
+        // Set isLoggedIn to true
+        setIsLoggedIn(true);
+
+
+        handleCloseVerificationDialog();
+
+
+        const userId = response.data.User_id;
+
+
+        // const userResponse = await axios.get(`http://localhost:8080/api/user/${userId}`);
+
+
+        localStorage.setItem('userId', userId);
+
+
+
+      } else {
+        // Handle unsuccessful login
+        console.error("Login failed:", response.data.message);
+      }
     } catch (error) {
       // Handle errors
       console.error("API Error:", error);
-
     }
-
   };
 
 
@@ -134,7 +161,7 @@ setidentifier(input)
     startTimer();
   };
 
- 
+
   const handleservices = () => {
     window.location.href = "/services"
   };
@@ -148,12 +175,21 @@ setidentifier(input)
   };
 
   const handleappointment = () => {
-    window.location.href = "/appointment"  };  
+    window.location.href = "/appointment"
+  };
 
-    const handleLogout = () => {
-      // Add logic to handle logout
-      setIsLoggedIn(false);
-    };
+  const handleLogout = () => {
+    // Add logic to handle logout
+    setIsLoggedIn(false);
+    handleCloseMenu();
+    localStorage.removeItem("userId")
+  };
+
+  const handleBooking = () => {
+
+    window.location.href = "/cart"
+    handleCloseMenu(); // Close the menu after selecting booking
+  };
 
   return (
     <div className={`navbar ${size} ${className}`}>
@@ -172,94 +208,107 @@ setidentifier(input)
       <div className="element-services col-md-2 justify-content-center">
         <div className="shape" />
         {isLoggedIn ? (
-          // Render user information if logged in
+          // Render user information and actions if logged in
           <div>
-            <div>Username</div>
-            <div>User Image</div>
-            <Button onClick={handleLogout}>Logout</Button>
+            <IconButton onClick={handleOpenMenu}>
+              {/* Replace this with your user image */}
+              <span><AccountCircleRoundedIcon style={{ color: 'white', height: '40px', width: '40px' }} /></span>
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleCloseMenu}
+            >
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem onClick={handleBooking}>Booking</MenuItem>
+            </Menu>
           </div>
         ) : (
           // Render login button if not logged in
-          <div className="element-hour-services" style={{ cursor: "pointer" }} onClick={handleOpenLoginDialog}>
+          <Button
+            className="element-hour-services"
+            style={{ cursor: "pointer", fontSize: '19px' }}
+            onClick={handleOpenLoginDialog}
+          >
             Login
-          </div>
+          </Button>
         )}
       </div>
 
       {/* Login Dialog */}
       <Dialog open={openLoginDialog} onClose={handleCloseLoginDialog} fullWidth maxWidth="xs">
-  <DialogTitle>
-    Login/Signup
-    <IconButton
-      aria-label="close"
-      onClick={handleCloseLoginDialog}
-      sx={{
-        position: 'absolute',
-        right: 8,
-        top: 8,
-        color: (theme) => theme.palette.grey[500],
-      }}
-    >
-      <CloseIcon />
-    </IconButton>
-  </DialogTitle>
-  <DialogContent>
-    {showPhoneNumberInput && (
-      <>
-        <TextField
-          label="Phone Number"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={identifier}
-          onChange={handleIdentifier}
+        <DialogTitle>
+          Login/Signup
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseLoginDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          {showPhoneNumberInput && (
+            <>
+              <TextField
+                label="Phone Number"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={identifier}
+                onChange={handleIdentifier}
 
-        />
-        <FormControlLabel
-          control={<Checkbox id="orderUpdates" />}
-          label="Receive order updates"
-        />
-      </>
-    )}
-    {!showPhoneNumberInput && (
-      <TextField
-        label="Email"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={identifier}
-        onChange={handleIdentifier}
- 
-      />
-    )}
-    <div style={{ marginTop: '10px' }}>
-      <h6 style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
-        Another way ?
-      </h6>
-    </div>
-  </DialogContent>
-  <DialogActions>
-    {showPhoneNumberInput ? (
-      <Button
-        fullWidth
-        disabled={!identifier || identifier.length <= 1}
-        onClick={handleProceed}
-        style={{ backgroundColor: 'deepskyblue', color: 'white' }}
-      >
-        Proceed
-      </Button>
-    ) : (
-      <Button
-        fullWidth
-        disabled={!identifier}
-        onClick={handleProceed}
-        style={{ backgroundColor: 'darkblue', color: 'white' }}
-      >
-        Proceed
-      </Button>
-    )}
-  </DialogActions>
-</Dialog>
+              />
+              <FormControlLabel
+                control={<Checkbox id="orderUpdates" />}
+                label="Receive order updates"
+              />
+            </>
+          )}
+          {!showPhoneNumberInput && (
+            <TextField
+              label="Email"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={identifier}
+              onChange={handleIdentifier}
+
+            />
+          )}
+          <div style={{ marginTop: '10px' }}>
+            <h6 style={{ color: 'deepskyblue', cursor: 'pointer' }} onClick={handleToggleInput}>
+              Another way ?
+            </h6>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          {showPhoneNumberInput ? (
+            <Button
+              fullWidth
+              disabled={!identifier || identifier.length <= 1}
+              onClick={handleProceed}
+              style={{ backgroundColor: 'deepskyblue', color: 'white' }}
+            >
+              Proceed
+            </Button>
+          ) : (
+            <Button
+              fullWidth
+              disabled={!identifier}
+              onClick={handleProceed}
+              style={{ backgroundColor: 'darkblue', color: 'white' }}
+            >
+              Proceed
+            </Button>
+          )}
+        </DialogActions>
+      </Dialog>
 
 
       {/* Verification Dialog */}
@@ -294,19 +343,21 @@ setidentifier(input)
           )}
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            {[1, 2, 3, 4, 5, 6].map((index) => (
-              <TextField
-                key={index}
-                variant="outlined"
-                margin="normal"
-                inputProps={{
-                  maxLength: 1,
-                  style: { textAlign: 'center', width: '2em' },
-                }}
-                value={verificationCode[index - 1] || ''}
-                onChange={(event) => handleVerificationCodeChangeForIndex(event, index)}
-              />
-            ))}
+          {[1, 2, 3, 4, 5, 6].map((index) => (
+  <TextField
+    key={index}
+    id={`verification-code-${index}`}
+    variant="outlined"
+    margin="normal"
+    inputProps={{
+      maxLength: 1,
+      style: { textAlign: 'center', width: '2em' },
+    }}
+    value={verificationCode[index - 1] || ''}
+    onChange={(event) => handleVerificationCodeChangeForIndex(event, index)}
+  />
+))}
+
           </div>
         </DialogContent>
         <DialogActions>

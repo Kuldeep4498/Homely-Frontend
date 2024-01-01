@@ -37,15 +37,31 @@ import { useEffect, useState } from "react";
 const Landing = () => {
  
     const placeholders = [
-      "Search for products...",
-      "Find what you need...",
-      "Explore our catalog...",
+      "Search for Massages...",
+      "Search for Plumbing...",
+      "Search for Beauty...",
       // Add more placeholder messages as needed
     ];
   
     const [placeholderIndex, setPlaceholderIndex] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/api/homely-services");
+          setServices(response.data);
+        } catch (error) {
+          console.error('Error fetching services:', error.message);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+
     useEffect(() => {
       // Set up an interval to rotate the placeholder every 2 seconds
       const intervalId = setInterval(() => {
@@ -74,6 +90,11 @@ const Landing = () => {
     document.getElementById("image1").classList.add("animate-from-left");
     document.getElementById("image2").classList.add("animate-from-right");
   }, []); 
+
+  const handleservices = () => {
+    window.location.href = "/services"
+  };
+
 
   return (
     <>
@@ -150,7 +171,7 @@ const Landing = () => {
           style: {
             color: "#3169B7",
             backgroundColor: "white",
-            height: "50px",
+       
             width: "33vw",
             borderRadius: "20px",
           },
@@ -162,93 +183,44 @@ const Landing = () => {
       />
 
 <Dialog open={isDialogOpen} onClose={handleCloseDialog} fullWidth maxWidth="md">
-  <DialogTitle variant="h5" style={{fontWeight:600}}>What are you looking for?
-  <IconButton
-            aria-label="close"
-            onClick={handleCloseDialog}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color:"black",
-            }}
-          />
-  </DialogTitle>
-  <DialogContent className="p-5">
-
-    <div style={{ display: 'flex', gap:'20px', marginBottom: '15px',justifyContent:'center' }}>
-      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-<div className="d-flex">
-<CardContent>
-          <Typography variant="h6">Cleaning</Typography>
-        </CardContent>
-     
-        <CardMedia component="img" alt="Card 1 Image" height="100"   style={{ objectFit: 'contain' }} image={broom}/>
-</div>
-       
-      </Card>
-       <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-        <div className="d-flex">
-        <CardContent>
-          <Typography variant="h6">Massage</Typography>
-        </CardContent>
-        {/* Right half with image */}
-        <CardMedia component="img" alt="Card 3 Image" height="100"   style={{ objectFit: 'contain' }} image={massage} />
+      <DialogTitle variant="h5" style={{ fontWeight: 600 }}>
+        What are you looking for ?...
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseDialog}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: 'black',
+          }}
+        >
+      
+        </IconButton>
+      </DialogTitle>
+      <DialogContent className="p-2" >
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '15px', justifyContent: 'center' }}>
+          {services.map((service) => (
+            <Card onClick={handleservices} key={service.id} style={{ width: '30%', backgroundColor: 'rgb(229 229 229)',cursor:'pointer' }}>
+              <div className="d-flex">
+                <CardContent className="col-md-6 d-flex align-items-center justify-content-center">
+                  <Typography style={{ fontSize: '15px',fontWeight:'bold' }}>{service.serviceName}</Typography>
+                </CardContent>
+                <div className="col-md-6">
+                  <CardMedia
+                    component="img"
+                    alt={`${service.name} Image`}
+                    height="100"
+                    style={{ objectFit: 'cover' }}
+                    image={service.imgUrl}
+                  />
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
-     
-      </Card>  
-      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-    <div className="d-flex">
-    <CardContent>
-          <Typography variant="h6">Spa</Typography>
-        </CardContent>
-
-        <CardMedia component="img" alt="Card 2 Image" height="100"   style={{ objectFit: 'contain' }} image={facemask} />
-    </div>
-        
-      </Card>
-    </div>
-
-    {/* Second Row */}
-    <div style={{ display: 'flex', gap:'20px',justifyContent:'center' }}>
-      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-        <div className="d-flex">
-        <CardContent>
-          <Typography variant="h6">Massage</Typography>
-        </CardContent>
-        {/* Right half with image */}
-        <CardMedia component="img" alt="Card 3 Image" height="100"   style={{ objectFit: 'contain' }} image={massage} />
-        </div>
-     
-      </Card>
-
-      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-        {/* Left half with text */}
-        <div className="d-flex">
-        <CardContent>
-          <Typography variant="h6">Massage</Typography>
-        </CardContent>
-        {/* Right half with image */}
-        <CardMedia component="img" alt="Card 4 Image" height="100"   style={{ objectFit: 'contain' }} image={massage}/>
-        </div>
-   
-      </Card>
-
-      <Card style={{height:'15vh',width:'18vw',backgroundColor:'rgb(229 229 229)'}}>
-        {/* Left half with text */}
-        <div className="d-flex">
-        <CardContent>
-          <Typography variant="h6">Spa</Typography>
-        </CardContent>
-        {/* Right half with image */}
-        <CardMedia component="img" alt="Card 5 Image"  height="100"  style={{ objectFit: 'contain' }} image={facemask} />
-        </div>
-        
-      </Card>
-    </div>
-  </DialogContent>
- 
-</Dialog>
+      </DialogContent>
+    </Dialog>
 
          
         </div>

@@ -7,13 +7,13 @@ import Button from '@mui/material/Button';
 import './serviceCard.css'; // Import your CSS file
 import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import {  Card, CardContent } from '@mui/material';
 const ServiceCard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerSlide = 3;
   const [slideIndex, setSlideIndex] = useState(0);
   const [cardsData, setCardsData] = useState([]);
-
+  const [cardData, setCardData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,9 +46,26 @@ const ServiceCard = () => {
     return () => clearInterval(intervalId);
   }, [currentIndex]);
 
-  const handlecard = () =>{
-    window.location.href='/cart'
-  }
+  const handlecard = async () => {
+    try {
+      const selectedCard = cardsData[currentIndex];
+      setCardData(selectedCard);
+
+      // Assuming you have a 'card' object with necessary data for the POST request
+    
+
+      // Make a POST request to your API endpoint
+      const response = await axios.post("http://localhost:8080/api/cart/add");
+      setCardData(response.data);
+      // Handle the response as needed
+      console.log("Booking successful!", response.data);
+
+      // Redirect to the cart page or do any other necessary actions
+      window.location.href = '/cart';
+    } catch (error) {
+      console.error('Error booking service:', error.message);
+    }
+  };
   const convertStringToImage = (imageString) => {
     return `data:image/png;base64,${imageString}`;
   };
@@ -64,8 +81,8 @@ const ServiceCard = () => {
           exitActive: 'card-exit-active',
         }}
       >
-        <div className="col-md-4 col-sm-6 d-flex" style={{ backgroundColor: '#142257', borderRadius: '14px' }}>
-          <div className="d-flex justify-content-center flex-column col-md-6 align-items-center grid gap-4">
+      <Card key={card.id} className="col-md-4 col-sm-6 d-flex" style={{ backgroundColor: '#142257', borderRadius: '14px' }}>
+          <CardContent className=" col-md-6 d-flex justify-content-center flex-column align-items-center grid gap-4">
             <div className='text-center'>
               <h4 className='mb-0' style={{ fontWeight: 'bold', fontSize: '17px', cursor: 'pointer', color: 'white' }}>
                 {card.description}
@@ -78,12 +95,11 @@ const ServiceCard = () => {
             >
               Book Now
             </Button>
+          </CardContent>
+          <div className=' col-md-6 d-flex justify-content-end align-items-center'>
+            <img src={card.imgUrl} alt="" style={{ height: '240px', width: '100%' }} />
           </div>
-          <div className='d-flex justify-content-end col-md-6 align-items-center'>
-            <img src={ card.imgUrl} alt="" style={{ height: "240px",width:'100%'}} />
-          {console.log("image",card.imgUrl)}
-          </div>
-        </div>
+        </Card>
       </CSSTransition>
     ));
   };
