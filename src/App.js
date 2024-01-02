@@ -5,6 +5,8 @@ import Service from "./Services/servicesPage"
 import HomeServicesCart from "./Shoppingcart/shoppingItem";
 import AboutUs from "./aboutUs";
 import Appointment from "./appointment";
+import Payment from "./payment/payment";
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/cart" element={<HomeServicesCart />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/appointment" element={<Appointment />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );

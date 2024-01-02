@@ -63,7 +63,7 @@ const BestService = () => {
           
             <div className='d-flex justify-content-between'>
             <Typography style={{fontSize:'28px'}}>
-             $ {card.price}
+            ₹ {card.price}
             </Typography>
             <Button
               variant="contained"

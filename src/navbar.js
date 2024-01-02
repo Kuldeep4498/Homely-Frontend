@@ -112,28 +112,20 @@ export const Navbar = ({
         otp: verificationCode.join(''),
         identifier: identifier,
       });
-
+  
       console.log("API Response:", response.data);
-
+  
       // Check if the login is successful
       if (response.data.status === "success") {
         // Set isLoggedIn to true
         setIsLoggedIn(true);
-
-
+  
         handleCloseVerificationDialog();
-
-
+  
         const userId = response.data.User_id;
-
-
-        // const userResponse = await axios.get(`http://localhost:8080/api/user/${userId}`);
-
-
+  
+        // Save authentication state to localStorage
         localStorage.setItem('userId', userId);
-
-
-
       } else {
         // Handle unsuccessful login
         console.error("Login failed:", response.data.message);
@@ -143,6 +135,13 @@ export const Navbar = ({
       console.error("API Error:", error);
     }
   };
+  useEffect(() => {
+    // Check if the user is logged in
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setIsLoggedIn(true);
+    }
+  }, []);  
 
 
   const startTimer = () => {

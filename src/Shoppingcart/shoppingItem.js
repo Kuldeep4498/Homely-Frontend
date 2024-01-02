@@ -53,6 +53,11 @@ const HomeServicesCart = ({ services, cart, onAddToCart, onRemoveFromCart }) => 
       console.error('Geolocation is not supported by your browser');
     }
   }, []);
+
+const handlepayment = () => {
+  window.location.href="/payment"
+}
+
   return (
     <div>
       <Navbar
@@ -80,7 +85,7 @@ const HomeServicesCart = ({ services, cart, onAddToCart, onRemoveFromCart }) => 
 
 
 </div>
-<div className="d-flex col-md-12">
+<div className="d-flex flex-column grid gap-2 col-md-12">
 {mockProducts.map((product) => (
 <ShoppingCartItem key={product.id} product={product} />
 ))}
@@ -183,10 +188,10 @@ const HomeServicesCart = ({ services, cart, onAddToCart, onRemoveFromCart }) => 
                 <Button
                   fullWidth
                   className="shopping-btn-proceed text-capitalize fs-6"
-               
+               onClick={handlepayment}
                   style={{backgroundColor:'deepskyblue',color:'white',marginBottom:'5px'}}
                 >
-                  Proceed to Checkout
+                  Pay
                 </Button>
           
               </div>

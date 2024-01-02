@@ -28,8 +28,12 @@ const ServiceCard = () => {
   }, []);
 
   const showNextCards = () => {
-    const nextIndex = currentIndex + cardsPerSlide;
-    setCurrentIndex(nextIndex >= cardsData.length ? 0 : nextIndex);
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + cardsPerSlide;
+      return nextIndex >= cardsData.length ? 0 : nextIndex;
+    });
+  
+    setSlideIndex((prevSlideIndex) => (prevSlideIndex === 0 ? 1 : 0));
   };
 
   const showPrevCards = () => {
@@ -49,38 +53,45 @@ const ServiceCard = () => {
   const handlecard = async () => {
     try {
       const selectedCard = cardsData[currentIndex];
-      setCardData(selectedCard);
-
-      // Assuming you have a 'card' object with necessary data for the POST request
-    
-
-      // Make a POST request to your API endpoint
-      const response = await axios.post("http://localhost:8080/api/cart/add");
-      setCardData(response.data);
-      // Handle the response as needed
-      console.log("Booking successful!", response.data);
-
-      // Redirect to the cart page or do any other necessary actions
-      window.location.href = '/cart';
+      const userId = parseInt(localStorage.getItem('userId'), 10); // Convert to integer
+  
+      // Check if userId is a valid integer
+      if (!isNaN(userId)) {
+        const quantity = 1; // You can set the quantity as needed
+  
+        // Make a POST request to your API endpoint with URL parameters
+        const response = await axios.post(`http://localhost:8080/api/cart/add?userId=${userId}&serviceId=${selectedCard.id}&quantity=${quantity}`);
+ 
+        // Handle the response as needed
+        console.log("Booking successful!", response.data);
+  
+        // Redirect to the cart page or do any other necessary actions
+    window.location.href = '/cart';    
+      } else {
+        console.error('Invalid userId. Unable to book service.');
+      }
     } catch (error) {
       console.error('Error booking service:', error.message);
     }
   };
+  
+  
+  
   const convertStringToImage = (imageString) => {
     return `data:image/png;base64,${imageString}`;
   };
   const renderCards = () => {
     return cardsData.slice(currentIndex, currentIndex + cardsPerSlide).map((card, index) => (
       <CSSTransition
-        key={card.id}
-        timeout={{ enter: 500, exit: 0 }} // Adjust the enter duration as needed
-        classNames={{
-          enter: slideIndex === 0 ? 'slide-in-right' : 'slide-in-left',
-          enterActive: 'card-enter-active',
-          exit: 'card-exit',
-          exitActive: 'card-exit-active',
-        }}
-      >
+      key={card.id}
+      timeout={{ enter: 500, exit: 500 }}
+      classNames={{
+        enter: slideIndex === 1 ? 'slide-in-right' : 'slide-in-left',
+        enterActive: 'card-enter-active',
+        exit: 'slide-out-right',
+        exitActive: 'card-exit-active',
+      }}
+    >
       <Card key={card.id} className="col-md-4 col-sm-6 d-flex" style={{ backgroundColor: '#142257', borderRadius: '14px' }}>
           <CardContent className=" col-md-6 d-flex justify-content-center flex-column align-items-center grid gap-4">
             <div className='text-center'>
@@ -115,7 +126,7 @@ const ServiceCard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="container-fluid py-5" >
+    <div className="container-fluid py-5  my-3" >
     
         <div
           id="carouselExampleIndicators2"

@@ -251,7 +251,7 @@ const Landing = () => {
               <Ic24MapPin className="icon-instance-node" color="white" />
             </div>
             <div className="text-wrapper-4">
-              Local US
+              Local 
               <br />
               Professional
             </div>
