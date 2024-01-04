@@ -11,26 +11,43 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const Appointment = () =>{
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
-  const [installation, setInstallation] = useState('');
+  const [selectedService, setSelectedService] = useState('');
   const [message, setMessage] = useState('');
+  const [services, setServices] = useState([]);
 
   const handleMakeAppointment = async () => {
     try {
-      const response = await axios.get('http://example.com/api/appointment', {
-        params: {
-          name,
-          email,
-          phoneNumber,
-          selectedDate,
-          installation,
-          message,
-        }
+      const userId = localStorage.getItem('userId');
+
+      // Check if user ID is available
+      if (!userId) {
+        console.error('User ID not found in local storage');
+        return;
+      }
+  
+      // Parse user ID as an integer
+      const parsedUserId = parseInt(userId, 10);
+
+      const response = await axios.post('http://localhost:8080/api/appointments/make', {
+        user: {
+          id: parsedUserId,
+        },
+        service: {
+          id: selectedService,
+        },
+        appointmentDateTime: selectedDate,
+        name:name,
+        email:email,
+        phone: phoneNumber,
+        message:message,
       });
 
       // Handle the response as needed
@@ -60,9 +77,24 @@ const Appointment = () =>{
     setEmail('');
     setPhoneNumber('');
     setSelectedDate('');
-    setInstallation('');
+ 
     setMessage('');
   };
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/homely-services`)
+      .then((response) => {
+        // Log the response data
+        console.log('Fetched services:', response.data);
+  
+        // Update the services state with the fetched data
+        setServices(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching services:', error.message);
+      });
+  }, []);
+  
 
 
     useEffect(() => {
@@ -181,24 +213,32 @@ eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
          
           </div>
           <div className='col-md-6'>
-          <input
-                        className="form-control border-secondary"
-                        placeholder="Select Date"
-                        value={selectedDate}
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                      />
-         
+          <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          dateFormat="MMMM d, yyyy h:mm aa"
+          placeholderText="Select Date and Time"
+          className="form-control border-secondary"
+        />
           </div>
                 </div>
-          <div className='col-md-12 d-flex grid gap-2'>
-          <input
-                        className="form-control border-secondary"
-                        placeholder="Installation"
-                        value={installation}
-                        onChange={(e) => setInstallation(e.target.value)}
-                      />
-         
-          </div>
+                <div className="col-md-12">
+                <select
+    className="form-select border-secondary"
+    value={selectedService}
+    onChange={(e) => setSelectedService(e.target.value)}
+  >
+    <option value="">Select Service</option>
+    {services.map((service) => (
+      <option key={service.id} value={service.id}>
+        {service.serviceName}
+      </option>
+    ))}
+  </select>
+        </div>
           <div className='col-md-12 d-flex grid gap-2'>
           <textarea
                     className="form-control border-secondary"

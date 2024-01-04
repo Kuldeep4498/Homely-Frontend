@@ -1,91 +1,76 @@
 import React from "react";
 import "./payment.css";
-
+import Background from "../Images/payment.jpg";
 const Payment = () => {
   return (
-    <section className="gradient-custom">
-      <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100">
-        <div className="col-md-12 d-flex justify-content-center py-5">
-          <div className="col-md-7 col-lg-5 col-xl-4">
-            <div className="card" style={{ borderRadius: '15px' }}>
-              <div className="card-body p-4">
-                <form>
-                  <div className="d-flex justify-content-between align-items-center mb-3">
-                    <div className="form-outline" style={{ border: 'none' }}>
-                      <input
-                        type="text"
-                        id="typeText"
-                        className="form-control form-control-lg"
-                        size="17"
-                        placeholder="Card Number"
-                        minLength="19"
-                        maxLength="19"
-                        style={{ border: 'none' }}
-                      />
-             
-                    </div>
-                    <img
-                      src="https://img.icons8.com/color/48/000000/visa.png"
-                      alt="visa"
-                      width="64px"
+<div
+        className="container-fluid d-flex justify-content-center"
+        style={{ height: "100vh", boxSizing: "border-box" ,backgroundImage: `url(${Background})`, backgroundSize: "cover", overflow: "hidden",backgroundRepeat:'no-repeat' }}
+      >
+      
+          
+          <div class="box-2 d-flex justify-content-center align-items-center col-md-6" >
+            <div class="box-inner-2 p-4 border-2 bg-white"style={{borderRadius:'15px'}}>
+              <div>
+                <p class="fw-bold fs-5">Payment Details</p>
+                <p class="dis mb-3 fs-6">
+                  Complete your purchase by providing your payment details
+                </p>
+              </div>
+              <div className="StripeComponent">
+                <form >
+                  <div class="mb-3">
+                    <p class="dis fw-bold mb-2 fs-6">
+                      Email address<span className="text-danger">*</span>
+                    </p>
+                    <input
+                      class="form-control"
+                      placeholder="Enter Email address..."
+                    
+                      type="email"
                     />
                   </div>
-
-                  <div className="d-flex justify-content-between align-items-center mb-4">
-                    <div className="form-outline" style={{ border: 'none' }}>
-                      <input
-                        type="text"
-                        id="typeName"
-                        className="form-control form-control-lg"
-                        size="17"
-                        placeholder="Cardholder's Name"
-                        style={{ border: 'none' }}
-                      />
+                  <div className="text-danger mb-1"> </div>
+                  <p class="dis fw-bold mb-2 fs-6">
+                    Card details<span className="text-danger">*</span>
+                  </p>
+                  <input
+                      class="form-control"
+                      placeholder="Enter Card Number... "
+                      type="text"
+                    
+                    />
+                   
+                  <div class="my-3 cardname">
+                    <p class="dis fw-bold mb-2 fs-6">
+                      Cardholder name<span className="text-danger">*</span>
+                    </p>{" "}
+                    <input
+                      class="form-control"
+                      placeholder="Enter Cardholder name..."
+                      type="text"
+                    
+                    />
+                  </div>
+             
                  
-                    </div>
-                  </div>
 
-                  <div className="d-flex justify-content-between align-items-center pb-2">
-                    <div className="form-outline" style={{ border: 'none' }}>
-                      <input
-                        type="text"
-                        id="typeExp"
-                        className="form-control form-control-lg"
-                        placeholder="MM/YYYY"
-                        size="7"
-                        minLength="7"
-                        maxLength="7"
-                        style={{ border: 'none' }}
-                      />
-            
+                    <div class="d-flex align-items-center justify-content-between  fs-6">
+                      <p class="fw-bold mb-0">Total</p>
+                   
+                      <button type="button" class="btn btn-info btn-lg btn-rounded d-flex align-items-center">
+                  <i class="fas fa-arrow-right" style={{color:'white'}}></i>
+                </button>
                     </div>
-                    <div className="form-outline" style={{ border: 'none' }}>
-                      <input
-                        type="password"
-                        id="typeText2"
-                        className="form-control form-control-lg"
-                        placeholder="&#9679;&#9679;&#9679;"
-                        size="1"
-                        minLength="3"
-                        maxLength="3"
-                        style={{ border: 'none' }}
-                      />
-                  
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-info btn-lg btn-rounded"
-                    >
-                      <i className="fas fa-arrow-right" style={{ color: 'white' }}></i>
-                    </button>
-                  </div>
+                   
+           
                 </form>
+            
               </div>
             </div>
           </div>
-        </div>
+    
       </div>
-    </section>
   );
 };
 

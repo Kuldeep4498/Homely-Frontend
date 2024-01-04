@@ -75,13 +75,11 @@ const handlepayment = () => {
         <div className="d-flex align-items-center flex-column col-md-8 grid gap-3">
 
 <div className="d-flex col-md-12 flex-column">
-  <h3>
-  Service Cart: 1 item
-  </h3>
-  <h6>
+ 
+  <h5>
 
   Thank you for choosing the Homely. Please check the address before checking out.
-  </h6>
+  </h5>
 
 
 </div>
@@ -189,7 +187,7 @@ const handlepayment = () => {
                   fullWidth
                   className="shopping-btn-proceed text-capitalize fs-6"
                onClick={handlepayment}
-                  style={{backgroundColor:'deepskyblue',color:'white',marginBottom:'5px'}}
+                  style={{backgroundColor: "#142257",color:'white',marginBottom:'5px'}}
                 >
                   Pay
                 </Button>

@@ -50,12 +50,12 @@ const ShoppingCartItem = ({ product }) => {
       {/* Card Details */}
       <div className="col-md-9 d-flex flex-column grid gap-3 px-3">
         <div className="row">
-          <Typography component="h5" variant="h5" className="cart-items-name">
+          <Typography  variant="h6" className="cart-items-name" style={{fontWeight:'bold'}}>
             {item.service.serviceName}
           </Typography>
         </div>
         <div className="row">
-          <Typography variant="body2" className="cart-Items-farmer">
+          <Typography  className="cart-Items-farmer" style={{fontSize:'15px',fontWeight:'500'}}>
             {item.service.description}
           </Typography>
         </div>
