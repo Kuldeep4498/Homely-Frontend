@@ -72,17 +72,11 @@ const StripeComponent = () => {
     } else {
   
   
-      // Set the amount in the headers
-      const headers = {
-        token: paymentMethod.id,
-        amount: '1200',  // Replace with the actual amount
-      };
+  
   
       try {
         const response = await axios.post(
-          `http://localhost:8080/payment/charge`,
-         
-          { headers: headers }  // Pass the headers here
+          `http://localhost:8080/payment/charge?token=${paymentMethod.id}&amount=222`
         );
   
         if (response.data.success) {
@@ -105,9 +99,9 @@ const StripeComponent = () => {
     <div className="container-fluid d-flex justify-content-center"style={{ backgroundImage: `url(${Background})`, backgroundSize: "cover", overflow: "hidden",backgroundRepeat:'no-repeat',height:'100vh'}}>
       <div
         class="box-2 d-flex justify-content-center align-items-center col-md-6"
-        style={{ borderRadius: "15px" }}
+       
       >
-        <div class="box-inner-2 p-4 border-2 bg-white">
+        <div class="box-inner-2 p-4 border-2 bg-white"  style={{ borderRadius: "15px" }}>
           <div>
             <p class="fw-bold fs-5">Payment Details</p>
             <p class="dis mb-3 fs-6">
@@ -167,7 +161,7 @@ const StripeComponent = () => {
                 <Button
                   type="submit"
                   class="btn btn-info btn-lg btn-rounded d-flex align-items-center"
-                  disabled={!isFormValid()}
+          
                   style={{cursor:'pointer'}}
                   onClick={handleSubmit}
                 >

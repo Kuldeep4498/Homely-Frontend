@@ -6,7 +6,7 @@ import HomeServicesCart from "./Shoppingcart/shoppingItem";
 import AboutUs from "./aboutUs";
 import Appointment from "./appointment";
 import Payment from "./payment/payment";
-
+import OrderTracker from "./BookingTracker/bookingTracker";
 function App() {
   return (
     <Router>
@@ -17,6 +17,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/ordertracker" element={<OrderTracker />} />
       </Routes>
     </Router>
   );

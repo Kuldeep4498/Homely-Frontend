@@ -17,6 +17,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { Box,Tabs,Tab } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export const Navbar = ({
   size,
   className,
@@ -35,6 +36,7 @@ export const Navbar = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(true);
 
+  const navigate = useNavigate();
   const [identifier, setidentifier] = useState("");
   const handleOpenLoginDialog = () => {
     setOpenLoginDialog(true);
@@ -163,11 +165,11 @@ export const Navbar = ({
 
 
   const handleservices = () => {
-    window.location.href = "/services"
+    navigate("/services") 
   };
 
   const handlehome = () => {
-    window.location.href = "/"
+    navigate("/") 
   };
 
   const handleaboutus = () => {
