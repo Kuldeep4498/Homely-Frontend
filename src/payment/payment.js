@@ -157,7 +157,7 @@ const StripeComponent = () => {
               </div>
 
               <div class="d-flex align-items-center justify-content-between  fs-6">
-                <p class="fw-bold mb-0">Total</p>
+                <p class="fw-bold mb-0">Total </p>
                 <Button
                   type="submit"
                   class="btn btn-info btn-lg btn-rounded d-flex align-items-center"
