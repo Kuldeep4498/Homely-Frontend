@@ -120,7 +120,7 @@ return(
         style={{ boxSizing: "border-box" }}
       >
         <div className="col-md-12 d-flex justify-content-center container-fluid grid gap-3" style={{height:'40rem'}}>
-        <div className="box-1 user col-md-7" style={{ position: 'relative' }}>
+        <div className="box-1 user col-md-6" style={{ position: 'relative' }}>
       <div className="slide-container top">
         <img
           src={about2}
@@ -140,7 +140,7 @@ return(
     </div>
 
 
-          <div class="box-2 d-flex justify-content-center align-items-center col-md-5">
+          <div class="box-2 d-flex justify-content-center align-items-center col-md-6">
             <div class="box-inner-2 p-4 border-2 d-flex flex-column grid gap-3">
             <div className="d-flex col-md-12 flex-column grid gap-3">
             <div className="d-flex grid gap-2 col-md-12 flex-column">
@@ -173,9 +173,7 @@ return(
               lineHeight:'30px'
             }}>
               <p className="mb-0">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod temp incididu
-labore et dolore magna aliqua sed do eiusmod temp sit amet voluptatum deleniti atque
-eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
+              Take control of your schedule and elevate your living experience with our easy service scheduling. At Homely, we understand the importance of convenience. Simply choose the service you need, pick a date and time that suits you, and leave the rest to us. Our expert technicians are ready to provide top-notch service, ensuring your home is well taken care of. Experience the ease of scheduling with us – because your time matters.
                </p>
             </div>
           </div>

@@ -16,6 +16,7 @@ import axios from "axios";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { Box,Tabs,Tab } from "@mui/material";
 export const Navbar = ({
   size,
   className,
@@ -190,6 +191,19 @@ export const Navbar = ({
     handleCloseMenu(); // Close the menu after selecting booking
   };
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const a11yProps = (index) => {
+    return {
+      id: `tabpanel-${index}`,
+      "aria-controls": `tabpanel-${index}`,
+    };
+  };
+
   return (
     <div className={`navbar ${size} ${className}`}>
       <div className="d-flex align-items-center col-md-2 justify-content-center" onClick={handlehome}>
@@ -237,7 +251,10 @@ export const Navbar = ({
       {/* Login Dialog */}
       <Dialog open={openLoginDialog} onClose={handleCloseLoginDialog} fullWidth maxWidth="xs">
         <DialogTitle>
+          <h4>
           Login/Signup
+          </h4>
+     
           <IconButton
             aria-label="close"
             onClick={handleCloseLoginDialog}
@@ -251,7 +268,54 @@ export const Navbar = ({
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
+ 
+        <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+ 
+    }}
+  >
+    <Tabs
+      value={value}
+      onChange={handleChange}
+      aria-label="basic tabs example"
+      sx={{
+        "& .MuiTabs-indicator": {
+          backgroundColor: "transparent", // Hide default indicator
+        },
+      }}
+    >
+      <Tab
+        label="Consumer"
+        {...a11yProps(0)}
+        sx={{
+          color: value === 0 ? "white !important" : "#142257",
+          backgroundColor: value === 0 ? "#142257" : "#E6E6E6",
+          width: value === 0 ? "130px" : "130px", // Adjust the width as needed
+          borderTopLeftRadius: value === 0 ? "20px" : "20px", // Adjust the border radius as needed
+          borderBottomLeftRadius: value === 0 ? "20px" : "20px",
+        fontWeight:'bold',
+          fontSize:'12px'
+        }}
+      />
+      <Tab
+        label="Provider"
+        {...a11yProps(1)}
+        sx={{
+          color: value === 1 ? "white !important" : "#142257",
+          backgroundColor: value === 1 ? "#142257" : "#E6E6E6",
+          width: value === 1 ? "130px" : "130px", // Adjust the width as needed
+          borderTopRightRadius: value === 0 ? "20px" : "20px", // Adjust the border radius as needed
+          borderBottomRightRadius: value === 0 ? "20px" : "20px", // Adjust the border radius as needed
+         fontSize:'12px',
+         fontWeight:'bold',
+        }}
+      />
+      {/* Add similar styling for other tabs */}
+    </Tabs>
+  </Box>
+        <DialogContent style={{margin:0}}>
           {showPhoneNumberInput && (
             <>
               <TextField
@@ -292,7 +356,7 @@ export const Navbar = ({
               fullWidth
               disabled={!identifier || identifier.length <= 1}
               onClick={handleProceed}
-              style={{ backgroundColor: 'deepskyblue', color: 'white' }}
+              style={{ backgroundColor: '#142257', color: 'white' }}
             >
               Proceed
             </Button>
@@ -301,7 +365,7 @@ export const Navbar = ({
               fullWidth
               disabled={!identifier}
               onClick={handleProceed}
-              style={{ backgroundColor: 'darkblue', color: 'white' }}
+              style={{ backgroundColor: '#142257', color: 'white' }}
             >
               Proceed
             </Button>

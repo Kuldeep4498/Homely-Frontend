@@ -20,18 +20,53 @@ const Divservices = () => {
     setHoveredCard(null);
   };
 
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/homely-services");
         setCardsData(response.data);
+        const firstService = response.data;
+        if (firstService.id) {
+          localStorage.setItem('selectedServiceId', firstService.id);
+        }
       } catch (error) {
         console.error('Error fetching data:', error.message);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+  }, []); 
+
+  const handleBooking = async () => {
+    try {
+      const userId = parseInt(localStorage.getItem('userId'), 10);
+
+      if (isNaN(userId)) {
+        console.error('Invalid userId. Unable to book service.');
+        return;
+      }
+
+      const quantity = 1;
+      const selectedServiceId = parseInt(localStorage.getItem('userId'), 10);
+      if (isNaN(selectedServiceId)) {
+        console.error('Invalid userId. Unable to book service.');
+        return;
+      }
+
+      const bookingResponse= await axios.post(`http://localhost:8080/api/cart/add?userId=${userId}&serviceId=${selectedServiceId}&quantity=${quantity}`);
+
+      console.log('Booking successful!', bookingResponse.data);
+
+      // Redirect to the cart page or do any other necessary actions
+      // window.location.href = '/cart';
+    } catch (error) {
+      console.error('Error booking service:', error.message);
+    }
+  };
+
+
 
   const renderCard = (index, imageUrl) => {
     const isHovered = hoveredCard === index;
@@ -46,10 +81,11 @@ const Divservices = () => {
 
     return (
       <div key={index} className="col-md-4 mb-4" onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-        <Card
+        <Card onClick={ handleBooking}
           style={{
             transform: isHovered ? 'scale(1.05)' : 'scale(1)',
             transition: 'transform 0.3s ease-in-out',
+            cursor:'pointer'
           }}
         >
           <CardMedia
@@ -101,7 +137,7 @@ const Divservices = () => {
                 lineHeight: '30px'
               }}>
                 <p className="mb-0">
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                Explore a world of exceptional services at Homely. From Plumbing to Beauty service, we redefine excellence.
                 </p>
               </div>
             </div>

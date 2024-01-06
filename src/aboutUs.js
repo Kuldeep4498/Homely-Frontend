@@ -86,9 +86,7 @@ return(
               lineHeight:'30px'
             }}>
               <p className="mb-0">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod temp incididu
-labore et dolore magna aliqua sed do eiusmod temp sit amet voluptatum deleniti atque
-eiu corrupti quos dolores et quas molestias excepturi sint occaecati cupio
+              Discover excellence in every service with our commitment to being the best and providing top-quality solutions. At Homely, we pride ourselves on being the go-to service providers that prioritize your satisfaction. Our skilled professionals are dedicated to delivering services that exceed expectations, ensuring every task is executed with precision and care. Experience the pinnacle of service quality as we strive to set new standards in reliability, efficiency, and customer satisfaction. Choose us for unparalleled service excellence – where your needs are met with the best and quality is never compromised.
                </p>
             </div>
           </div>

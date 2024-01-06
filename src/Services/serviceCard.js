@@ -52,21 +52,19 @@ const ServiceCard = () => {
 
   const handlecard = async () => {
     try {
+      console.log('Attempting to book service...');
       const selectedCard = cardsData[currentIndex];
-      const userId = parseInt(localStorage.getItem('userId'), 10); // Convert to integer
+      console.log('Selected Card:', selectedCard);
   
-      // Check if userId is a valid integer
+      const userId = parseInt(localStorage.getItem('userId'), 10);
+  
       if (!isNaN(userId)) {
-        const quantity = 1; // You can set the quantity as needed
+        const quantity = 1;
   
-        // Make a POST request to your API endpoint with URL parameters
         const response = await axios.post(`http://localhost:8080/api/cart/add?userId=${userId}&serviceId=${selectedCard.id}&quantity=${quantity}`);
- 
-        // Handle the response as needed
-        console.log("Booking successful!", response.data);
   
-        // Redirect to the cart page or do any other necessary actions
-    window.location.href = '/cart';    
+        console.log("Booking successful!", response.data);
+        window.location.href = '/cart';
       } else {
         console.error('Invalid userId. Unable to book service.');
       }
@@ -74,6 +72,7 @@ const ServiceCard = () => {
       console.error('Error booking service:', error.message);
     }
   };
+  
   
   
   
