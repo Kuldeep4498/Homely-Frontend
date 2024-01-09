@@ -58,6 +58,9 @@ const handlepayment = () => {
   window.location.href="/payment"
 }
 
+
+
+
   return (
     <div>
       <Navbar
@@ -130,10 +133,7 @@ const handlepayment = () => {
                 </Typography>
               </ListItem>
               <ListItem
-                style={{
-                  justifyContent: "space-between",
-                  borderBottom: "1px solid black",
-                }}
+            
               >
                 <Typography className="price-list-item">
                   Item total price
@@ -143,22 +143,7 @@ const handlepayment = () => {
           
                 </Typography>
               </ListItem>
-              <ListItem style={{ justifyContent: "space-between" }}>
-                <Typography className="price-list-item">
-                  Subtotal (Tax excluded)
-                </Typography>
-
-                <Typography className="price-list-item-1">
-              
-                </Typography>
-              </ListItem>
-              <ListItem style={{ justifyContent: "space-between" }}>
-                <Typography className="price-list-item">Tax</Typography>
-
-                <Typography className="price-list-item-1">
-          
-                </Typography>
-              </ListItem>
+             
               <ListItem
                 style={{
                   justifyContent: "space-between",

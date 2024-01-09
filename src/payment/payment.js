@@ -12,6 +12,8 @@ import axios from "axios";  // Import Axios library
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 const stripePromise = loadStripe(
   "pk_test_51OUpamSIED645FFTWK9gfLChOwVRfQDopjgpr3gbUaRQ2JQANxfDvVLUrGmbt7M3PelRcGosMMaoQmYwaI4HpqOm00sXHqNOnN"
 );
@@ -80,8 +82,12 @@ const StripeComponent = () => {
         );
   
         if (response.data.success) {
-          // Handle success
+       
           console.log("Payment successful");
+          toast.success('Payment has been made!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000, // Close the toast after 3 seconds
+          });
         } else {
           toast.error(response.data.error, {
             position: toast.POSITION.TOP_CENTER,
@@ -162,7 +168,7 @@ const StripeComponent = () => {
                   type="submit"
                   class="btn btn-info btn-lg btn-rounded d-flex align-items-center"
           
-                  style={{cursor:'pointer'}}
+               
                   onClick={handleSubmit}
                 >
                   <i class="fas fa-arrow-right" style={{ color: "white" }}></i>
@@ -172,6 +178,7 @@ const StripeComponent = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

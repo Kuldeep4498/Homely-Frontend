@@ -3,7 +3,6 @@ import { Navbar } from "./navbar";
 import Footer from "./Globalcomponent/footer";
 import { ReactComponent as ExampleLogo } from "./Images/Example Logo.svg";
 import { ReactComponent as Icon2 } from "./Images/Icon.svg";
-import { ReactComponent as Tick } from "./Images/tick.svg.svg";
 import about from "./Images/make-appointment-img.png.png";
 import about2 from "./Images/make-appointment-shape.png.png";
 import "./aboutUs.css"
@@ -13,6 +12,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
 const Appointment = () =>{
 
   const [name, setName] = useState('');
@@ -58,7 +58,7 @@ const Appointment = () =>{
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000, // Close the toast after 3 seconds
       });
-
+window.location.href='/payment'
       // Clear the form fields after successful submission
       clearFormFields();
     } catch (error) {
@@ -195,6 +195,7 @@ return(
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        style={{width:'98%'}}
                       />
          
           </div>
@@ -223,25 +224,41 @@ return(
         />
           </div>
                 </div>
-                <div className="col-md-12">
-                <select
-    className="form-select border-secondary"
-    value={selectedService}
-    onChange={(e) => setSelectedService(e.target.value)}
-  >
-    <option value="">Select Service</option>
-    {services.map((service) => (
-      <option key={service.id} value={service.id}>
-        {service.serviceName}
-      </option>
-    ))}
-  </select>
-        </div>
+                <div className='col-md-12 d-flex grid gap-2'>
+         
+                    <div className="col-md-6">
+                    <select
+        className="form-select border-secondary"
+        value={selectedService}
+        onChange={(e) => setSelectedService(e.target.value)}
+      >
+        <option value="">Select Service</option>
+        {services.map((service) => (
+          <option key={service.id} value={service.id}>
+            {service.serviceName}
+          </option>
+        ))}
+      </select>
+            </div>
+            <div className='col-md-6'>
+              
+              <input
+                            className="form-control border-secondary"
+                            placeholder="Pin-code"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            style={{width:'98%'}}
+                          />
+             
+       
+                    </div>
+                </div>
+              
           <div className='col-md-12 d-flex grid gap-2'>
           <textarea
                     className="form-control border-secondary"
                     id="nameInput"
-                    placeholder="Message"
+                    placeholder="Address"
                     value={message}
                 onChange={(e) => setMessage(e.target.value)}
                   />
