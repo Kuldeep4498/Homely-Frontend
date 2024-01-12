@@ -5,12 +5,14 @@ import Rectangle86 from "../Images/Rectangle86.png";
 import Rectangle88 from "../Images/Rectangle88.png";
 import Rectangle90 from "../Images/Rectangle90.png";
 import Rectangle92 from "../Images/Rectangle92.png";
-import { Card, CardMedia, Typography } from '@mui/material';
+import { Card, CardMedia, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import "./services.css";
 import axios from 'axios';
+
 const Divservices = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [cardsData, setCardsData] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
 
   const handleMouseEnter = (index) => {
     setHoveredCard(index);
@@ -20,8 +22,14 @@ const Divservices = () => {
     setHoveredCard(null);
   };
 
+  const handleCardClick = (index) => {
+    setSelectedService(cardsData[index]);
+  };
 
-  
+  const handleCloseDialog = () => {
+    setSelectedService(null);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,62 +45,20 @@ const Divservices = () => {
     };
 
     fetchData();
-  }, []); 
-
-  const handleBooking = async () => {
-    try {
-      const userId = parseInt(localStorage.getItem('userId'), 10);
-
-      if (isNaN(userId)) {
-        console.error('Invalid userId. Unable to book service.');
-        return;
-      }
-
-      const quantity = 1;
-      const selectedServiceId = parseInt(localStorage.getItem('userId'), 10);
-      if (isNaN(selectedServiceId)) {
-        console.error('Invalid userId. Unable to book service.');
-        return;
-      }
-
-      const bookingResponse= await axios.post(`http://localhost:8080/api/cart/add?userId=${userId}&serviceId=${selectedServiceId}&quantity=${quantity}`);
-
-      console.log('Booking successful!', bookingResponse.data);
-
-      // Redirect to the cart page or do any other necessary actions
-      // window.location.href = '/cart';
-    } catch (error) {
-      console.error('Error booking service:', error.message);
-    }
-  };
-
-
+  }, []);
 
   const renderCard = (index, imageUrl) => {
     const isHovered = hoveredCard === index;
-    const card = cardsData[index]; // Use the fetched data for the corresponding card
-
+    const card = cardsData[index];
 
     if (!card || !card.serviceName) {
-      // Handle the case where card or card.serviceName is undefined
       return null;
     }
-  
 
     return (
       <div key={index} className="col-md-4 mb-4" onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
-        <Card onClick={ handleBooking}
-          style={{
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-            transition: 'transform 0.3s ease-in-out',
-            cursor:'pointer'
-          }}
-        >
-          <CardMedia
-            component="img"
-            height="190"
-            image={imageUrl}
-          />
+        <Card onClick={() => handleCardClick(index)} style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.3s ease-in-out', cursor: 'pointer' }}>
+          <CardMedia component="img" height="190" image={imageUrl} />
           <div className="d-flex col-md-12 align-items-center justify-content-center" style={{ background: '#2CAAC1', height: '74px', color: 'white', fontSize: '20px', fontWeight: 700 }}>
             <Typography variant="body1" className="mb-0 fw-bold fs-5 ">
               {card.serviceName}
@@ -137,26 +103,81 @@ const Divservices = () => {
                 lineHeight: '30px'
               }}>
                 <p className="mb-0">
-                Explore a world of exceptional services at Homely. From Plumbing to Beauty service, we redefine excellence.
+                  Explore a world of exceptional services at Homely. From Plumbing to Beauty service, we redefine excellence.
                 </p>
               </div>
             </div>
             {renderCard(1, Rectangle92)}
             {renderCard(2, Rectangle84)}
-            {/* Add more cards with appropriate index and image */}
           </div>
           <div className="row slide-in-right" style={{ height: '40em' }}>
             {renderCard(3, Rectangle86)}
             {renderCard(4, Rectangle88)}
             {renderCard(5, Rectangle90)}
-            {/* Add more cards with appropriate index and image */}
           </div>
-          {/* ... other content ... */}
         </div>
       </div>
+
+      {/* Dialog for displaying service details */}
+      <Dialog open={selectedService !== null} onClose={handleCloseDialog}>
+        <DialogTitle><h5>{selectedService?.serviceName}</h5></DialogTitle>
+        <DialogContent>
+  <div className="d-flex flex-column">
+    <div className="d-flex col-md-12 w-100">
+      <img src={selectedService?.imgUrl} alt={selectedService?.serviceName} style={{ width: '100%', height: '200px' }} />
+    </div>
+    <div>
+      <Typography variant="h6">{selectedService?.description}</Typography>
+    </div>
+
+    {/* Map through the data and render cards inside the dialog */}
+    <div className="d-flex flex-wrap col-md-12  mt-4">
+      {cardsData.map((service, index) => (
+        <Card key={index} style={{ margin: '8px',width:'100%', textAlign: 'center' }}>
+          <div className="col-md-12 d-flex">
+          <div className="col-md-3">
+          <CardMedia component="img" height="120" image={service.imgUrl} />
+          </div>
+        
+          <div className="d-flex col-md-9 flex-column align-items-center justify-content-center grid gap-2" >
+            <div className="px-2 d-flex col-md-12 align-items-center">
+            <Typography variant="body1" className="mb-0 fw-bold fs-5">
+              {service.serviceName}
+            </Typography>
+            </div>
+         
+            <div className="px-2 d-flex col-md-12 align-items-center">
+            <Typography variant="body2">{service.description}</Typography>
+          </div>
+          <div className="d-flex col-md-12 justify-content-between">
+            <div className=" px-4 col-md-4 d-flex  align-items-center">
+            <Typography variant="body1" className="mb-0 fw-bold fs-5">
+            ₹ {service.price}
+            </Typography>
+            </div>
+     <div className="col-md-4 d-flex justify-content-center ">
+     <Button style={{backgroundColor:'deepskyblue',color:'white'}}>
+              Add
+            </Button>
+     </div>
+    
+          </div>
+          </div>
+          </div>
+      
+         
+        </Card>
+      ))}
+    </div>
+  </div>
+</DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
-
 
 export default Divservices;

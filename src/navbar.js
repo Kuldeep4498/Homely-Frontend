@@ -26,7 +26,9 @@ export const Navbar = ({
   divClassNameOverride,
   hasDiv = true,
   divClassName1,
-  text = "Login",
+  loginText = "Login",
+  joinUsText = "Join Us",
+
 }) => {
   const [openLoginDialog, setOpenLoginDialog] = useState(false);
   const [openVerificationDialog, setOpenVerificationDialog] = useState(false);
@@ -177,7 +179,12 @@ export const Navbar = ({
   };
 
   const handleappointment = () => {
-    window.location.href = "/appointment"
+    navigate( "/appointment")
+  };
+
+
+  const handleJoinUs = () => {
+    navigate( "/joinus")
   };
 
   const handleLogout = () => {
@@ -218,6 +225,9 @@ export const Navbar = ({
         <div className={`text-wrapper ${divClassNameOverride}`} style={{ cursor: 'pointer' }} onClick={handleservices}>Services</div>
         {hasDiv && <div className="text-wrapper">Our Blog</div>}
         <div className={`text-wrapper ${divClassName1}`} style={{ cursor: 'pointer' }} onClick={handleappointment}>Appointment</div>
+        <div className={`text-wrapper ${divClassName}`} style={{ cursor: 'pointer' }} onClick={handleJoinUs}>
+         Join Us
+        </div>
       </div>
 
       <div className="element-services col-md-2 justify-content-center">

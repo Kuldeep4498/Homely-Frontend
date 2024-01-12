@@ -22,7 +22,7 @@ const Appointment = () =>{
   const [selectedService, setSelectedService] = useState('');
   const [message, setMessage] = useState('');
   const [services, setServices] = useState([]);
-
+const [pincode,setpincode] =  useState('')
   const handleMakeAppointment = async () => {
     try {
       const userId = localStorage.getItem('userId');
@@ -47,7 +47,8 @@ const Appointment = () =>{
         name:name,
         email:email,
         phone: phoneNumber,
-        message:message,
+        address:message,
+        pincode:pincode
       });
 
       // Handle the response as needed
@@ -58,7 +59,7 @@ const Appointment = () =>{
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000, // Close the toast after 3 seconds
       });
-window.location.href='/payment'
+// window.location.href='/payment'
       // Clear the form fields after successful submission
       clearFormFields();
     } catch (error) {
@@ -245,8 +246,8 @@ return(
               <input
                             className="form-control border-secondary"
                             placeholder="Pin-code"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={pincode}
+                            onChange={(e) => setpincode(e.target.value)}
                             style={{width:'98%'}}
                           />
              

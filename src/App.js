@@ -7,6 +7,7 @@ import AboutUs from "./aboutUs";
 import Appointment from "./appointment";
 import Payment from "./payment/payment";
 import OrderTracker from "./BookingTracker/bookingTracker";
+import ApplicationComponent from "./JoinUs/JoinUs";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/ordertracker" element={<OrderTracker />} />
+        <Route path="/joinus" element={<ApplicationComponent />} />
       </Routes>
     </Router>
   );

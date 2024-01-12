@@ -232,7 +232,7 @@
     display: flex;
     align-items: center;
     color: var(--white);
-    justify-content: stretch;
+    justify-content: center;
     width: 100%;
   }
   .container,
@@ -256,7 +256,7 @@
   .footer-section {
 
 flex-direction: column;
-gap: 20px;
+gap: 35px;
     display: flex;
     align-items: center;
     justify-content: center;

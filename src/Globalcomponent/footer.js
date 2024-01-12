@@ -20,7 +20,7 @@ const Footer = () => {
 
                 
                   <div className="description1">
-                  Home Pro is your premier destination for top-notch smart home service and repair. 
+                  Homely is your premier destination for top-notch smart home service and repair. 
                   </div>
             
            
